@@ -1,2 +1,2 @@
 # Chess
-Java Chess Application With SWING
+Main Menu

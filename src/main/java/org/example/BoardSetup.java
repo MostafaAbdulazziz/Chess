@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class BoardSetup {
     private JFrame frame;
-    private JLabel[] squares = new JLabel[64];
+    private Square[] squares = new Square[64];
     protected int[] GameBoard = new int[64];
     private JLabel mainLabel, backgroundLabel;
     private Map<Integer, String> PiecesPlaces = new HashMap<Integer, String>();
@@ -36,11 +36,11 @@ public class BoardSetup {
         this.mainLabel = mainLabel;
     }
 
-    public JLabel[] getSquares() {
+    public Square[] getSquares() {
         return squares;
     }
 
-    public void setSquares(JLabel[] squares) {
+    public void setSquares(Square[] squares) {
         this.squares = squares;
     }
 
@@ -76,13 +76,13 @@ public class BoardSetup {
                 Color c = colors[id % 2];
                 id++;
 
-                JLabel label = new JLabel();
-                label.setBackground(c);
-                label.setOpaque(true);
-                label.setHorizontalAlignment(JLabel.CENTER);
-                label.setVerticalAlignment(JLabel.CENTER);
-                squares[cnt] = label;
-                mainLabel.add(label);
+                Square square = new Square(cnt);
+                square.setBackground(c);
+                square.setOpaque(true);
+                square.setHorizontalAlignment(square.CENTER);
+                square.setVerticalAlignment(square.CENTER);
+                squares[cnt] = square;
+                mainLabel.add(square);
                 cnt++;
 
             }

@@ -4,56 +4,46 @@ import javax.swing.*;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class addMovements {
-    public static JLabel[] add_Movements(JLabel[] squares)
-    {
-        for (int i =0 ;i<64;++i)
-        {
+    static Square[] board;
 
-           squares[i].addMouseListener(new MouseAdapter() {
-               private Point initialClick;
-               private Point currentClick;
+    public static Square[] add_Movements(Square[] squares) {
+        board = squares;
 
-               @Override
-               public void mouseDragged(MouseEvent e) {
-                   super.mouseDragged(e);
-               }
+        // Add mouse listeners to all squares on the chessboard
+        for (int i = 0; i < 64; ++i) {
+            board[i].addMouseListener(new MouseAdapter() {
+                int from = -1;
+                int to = -1;
+                boolean selected = false;  // To track if a piece is selected
 
-               @Override
-               public void mouseMoved(MouseEvent e) {
-                   super.mouseMoved(e);
-               }
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    Square clickedSquare = (Square) e.getSource();  // Get the square clicked
 
-               @Override
-               public void mouseClicked(MouseEvent e) {
-
-               }
-
-               @Override
-               public void mousePressed(MouseEvent e) {
-
-               }
-
-               @Override
-               public void mouseReleased(MouseEvent e) {
-
-               }
-
-               @Override
-               public void mouseEntered(MouseEvent e) {
-
-               }
-
-               @Override
-               public void mouseExited(MouseEvent e) {
-
-               }
-           });
-
+                    // First click: select the piece
+                    if (!selected) {
+                        from = clickedSquare.getIndex();  // Store the index of the square
+                        if (board[from].hasPiece()) {  // Ensure there's a piece to move
+                            selected = true;
+                            System.out.println("Piece selected from square: " + from);
+                        }
+                    }
+                    // Second click: move the piece
+                    else {
+                        to = clickedSquare.getIndex();  // Get the destination square index
+                        if (from != to) {
+                            selected = false;
+                            // Perform the move and update the board
+                            board = new Move(from, to, squares).getBoard();
+                            System.out.println("Moved piece from square " + from + " to " + to);
+                        }
+                    }
+                }
+            });
         }
-        return squares;
 
+        return board;
     }
 }

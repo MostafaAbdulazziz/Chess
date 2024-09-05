@@ -12,18 +12,16 @@ public class Board {
     PiecesLoader pieceLoader ;
     HighlightManager highlightManager ;
     testMoves highlightTestMoves ;
-    PieceInitializer  pieceInitializer ;
     Board(){
         Board = new BoardSetup();
         highlightTestMoves = new testMoves();
-        PieceInitializer theme1PieceInitializer = new Theme1PieceInitializer(); //Polymorphism
-        Map<Integer,String>pieces = theme1PieceInitializer.initializePieces();
         pieceLoader = new PiecesLoader();
         highlightManager = new HighlightManager();
-        Board.setMap(pieces);
-        Board.setSquares(pieceLoader.loadPieces(Board.getSquares(),pieces));
-        Board.setSquares( highlightManager.addHighlightFeature(Board.getSquares()));
+        addMovements movements = new addMovements();
+        Board.setSquares(movements.add_Movements(Board.getSquares()));
+        Board.setSquares(pieceLoader.loadPieces(Board.getSquares()));
         Board.setSquares(highlightTestMoves.highlightMoves(Board.getSquares()));
+        Board.setSquares( highlightManager.addHighlightFeature(Board.getSquares()));
 
 
 

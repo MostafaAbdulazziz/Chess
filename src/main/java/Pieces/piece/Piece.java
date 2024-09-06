@@ -1,6 +1,4 @@
-package org.example;
-
-import javax.swing.*;
+package Pieces.piece;
 
 public class Piece  {
     boolean isWhite;

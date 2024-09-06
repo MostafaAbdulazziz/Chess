@@ -1,6 +1,6 @@
-package org.example;
+package Pieces.piece;
 
-public class Queen  extends Piece{
+public class Queen  extends Piece {
 
     public Queen(boolean isWhite) {
         super(isWhite);

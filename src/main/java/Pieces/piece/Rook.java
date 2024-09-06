@@ -1,4 +1,4 @@
-package org.example;
+package Pieces.piece;
 
 public class Rook extends Piece {
     public Rook(boolean isWhite) {

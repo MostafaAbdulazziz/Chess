@@ -1,4 +1,6 @@
-package org.example;
+package Highlighting;
+
+import Board.Square;
 
 import javax.swing.*;
 import javax.swing.border.Border;

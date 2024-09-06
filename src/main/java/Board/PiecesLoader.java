@@ -1,4 +1,6 @@
-package org.example;
+package Board;
+
+import Pieces.piece.*;
 
 public class PiecesLoader {
     Square[] loadPieces(Square[] squares) {

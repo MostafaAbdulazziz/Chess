@@ -1,4 +1,7 @@
-package org.example;
+package Movable;
+
+import Pieces.piece.Piece;
+import Board.Square;
 
 public class Move {
     private int from;

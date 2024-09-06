@@ -1,4 +1,6 @@
-package org.example;
+package Board;
+
+import Pieces.piece.Piece;
 
 import javax.swing.*;
 

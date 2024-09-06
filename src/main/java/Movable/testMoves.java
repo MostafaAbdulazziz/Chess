@@ -1,4 +1,6 @@
-package org.example;
+package Movable;
+
+import Board.Square;
 
 import javax.swing.*;
 import java.awt.*;

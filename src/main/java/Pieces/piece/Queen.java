@@ -6,11 +6,11 @@ public class Queen  extends Piece {
         super(isWhite);
         if(isWhite)
         {
-            super.setPath("C:\\Users\\mosta\\Chess\\src\\sources\\wq.png");
+            super.setPath("src\\sources\\wq.png");
         }
         else
         {
-            super.setPath("C:\\Users\\mosta\\Chess\\src\\sources\\bq.png");
+            super.setPath("src\\sources\\bq.png");
         }
     }
 }

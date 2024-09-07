@@ -34,4 +34,34 @@ public class PiecesLoader {
 
         return squares;
     }
+    int[] loadPositions(int[] gameBoard)
+    {
+        gameBoard[0]=22;
+        gameBoard[1]=33;
+        gameBoard[2]=44;
+        gameBoard[3]=55;
+        gameBoard[4]=66;
+        gameBoard[5]=44;
+        gameBoard[6]=33;
+        gameBoard[7]=22;
+        for (int i = 8; i < 16; i++) {
+            gameBoard[i]= 11 ;
+        }
+        for (int i = 16; i < 48; i++) {
+            gameBoard[i]= 100;  // Empty gameBoard
+        }
+        for (int i = 48; i < 56; i++) {
+            gameBoard[i]=1;
+        }
+        gameBoard[56]=2;
+        gameBoard[57]=3;
+        gameBoard[58]=4;
+        gameBoard[59]=5;
+        gameBoard[60]=6;
+        gameBoard[61]=4;
+        gameBoard[62]=3;
+        gameBoard[63]=2;
+        return gameBoard;
+
+    }    
 }

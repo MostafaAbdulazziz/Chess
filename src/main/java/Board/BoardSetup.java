@@ -2,15 +2,15 @@ package Board;
 
 import Highlighting.HighlightManager;
 import Movable.Move;
-import Movable.addMovements;
-import Movable.testMoves;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.HashSet;
+import java.util.Vector;
 
-public class BoardSetup extends JLabel implements MouseListener {
+public class BoardSetup extends JLabel{
     private Square[] squares = new Square[64];
     protected int[] GameBoard = new int[64];
     int from = -1;
@@ -18,12 +18,11 @@ public class BoardSetup extends JLabel implements MouseListener {
     boolean selected = false;  // To track if a piece is selected
     PiecesLoader pieceLoader;
     HighlightManager highlightManager;
-    testMoves highlightTestMoves;
+    Vector<Integer>prevPossibleMoves;
 
     public JLabel getBoardSetup() {
         return this;
     }
-
 
     public Square[] getSquares() {
         return squares;
@@ -33,15 +32,11 @@ public class BoardSetup extends JLabel implements MouseListener {
         this.squares = squares;
     }
 
-    BoardSetup() {
-
+    public BoardSetup() {
         this.setOpaque(true);
-
-
         this.setLayout(new GridLayout(8, 8));
         this.setBorder(BorderFactory.createLineBorder(new Color(63, 39, 7), 5));
         this.setIcon(new ImageIcon("D:\\Programing\\JAVA GUI\\Board_GUI\\src\\sources\\Mainlbl.jpg"));
-
 
         this.setOpaque(false);
 
@@ -59,69 +54,80 @@ public class BoardSetup extends JLabel implements MouseListener {
                 square.setOpaque(true);
                 square.setHorizontalAlignment(square.CENTER);
                 square.setVerticalAlignment(square.CENTER);
+                square.setText(String.valueOf(cnt));
                 squares[cnt] = square;
+
+                square.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        handleSquareClick(square);
+                    }
+                });
+
+
+
                 this.add(square);
                 cnt++;
-
             }
             id++;
         }
 
+        // Load pieces and highlight movement functionality
 
-        highlightTestMoves = new testMoves();
         pieceLoader = new PiecesLoader();
         highlightManager = new HighlightManager();
-        addMovements movements = new addMovements();
-        squares = (addMovements.add_Movements(squares));
         squares = (pieceLoader.loadPieces(squares));
-        squares = (highlightTestMoves.highlightMoves(squares));
         squares = (highlightManager.addHighlightFeature(squares));
+        GameBoard = pieceLoader.loadPositions(GameBoard);
+        prevPossibleMoves = new Vector<Integer>();
 
+        // A
 
     }
 
+    private void handleSquareClick(Square square) {
+        int index = square.getIndex();
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        Square sq = (Square) this.getComponentAt(new Point(e.getX(), e.getY()));
-        // First click: select the piece
         if (!selected) {
-            from = sq.getIndex();  // Store the index of the square
-            if (squares[from].hasPiece()) {  // Ensure there's a piece to move
+
+            from = index;
+            if (squares[from].hasPiece()) {
                 selected = true;
                 System.out.println("Piece selected from square: " + from);
+                squares[index].getPiece().findMoves(index,squares,GameBoard);
+                new HashSet<>(prevPossibleMoves).containsAll(squares[index].getPiece().getPossibleMoves());
+
+                for(int move : squares[index].getPiece().getPossibleMoves())
+                {
+                    squares[move].setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+                }
+                updateBoard();
+
             }
-        }
-        // Second click: move the piece
-        else {
-            to = sq.getIndex();  // Get the destination square index
-            if (from != to) {
+        } else {
+            to = index;
                 selected = false;
-                // Perform the move and update the board
-                squares = new Move(from, to, squares).getBoard();
+                for (int i =0 ; i<64;i++)
+                    squares[i].setBorder(null);
+                updateBoard();
+            if (from != to  ) {
+                Move move = new Move(from, to, squares,GameBoard);
+                squares = move.getBoard();
+                this.GameBoard = move.getGameBoard();
+                updateBoard();
+
                 System.out.println("Moved piece from square " + from + " to " + to);
             }
         }
-
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
+    // Update board UI after move
+    private void updateBoard() {
+        this.removeAll();
+        for (Square square : squares) {
+            this.add(square);
+        }
+        this.revalidate();
+        this.repaint();
     }
 }

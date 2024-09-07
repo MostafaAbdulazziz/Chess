@@ -5,11 +5,11 @@ public class King extends Piece {
         super(isWhite);
         if(isWhite)
         {
-            super.setPath("C:\\Users\\mosta\\Chess\\src\\sources\\wk.png");
+            super.setPath("src\\sources\\wk.png");
         }
         else
         {
-            super.setPath("C:\\Users\\mosta\\Chess\\src\\sources\\bk.png");
+            super.setPath("src\\sources\\bk.png");
         }
     }
 }

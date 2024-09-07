@@ -5,11 +5,11 @@ public class Bishop extends Piece {
         super(isWhite);
         if(isWhite)
         {
-            super.setPath("C:\\Users\\mosta\\Chess\\src\\sources\\wb.png");
+            super.setPath("src/sources/wb.png");
         }
         else
         {
-            super.setPath("C:\\Users\\mosta\\Chess\\src\\sources\\bb.png");
+            super.setPath("src/sources/bb.png");
         }
     }
 }

@@ -3,18 +3,22 @@ package Board;
 import Pieces.piece.Piece;
 
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Square extends JLabel {
+public class Square extends JLabel  {
     private int index;
     private boolean isHighlighted;
     private boolean isOccupied;
     private Piece piece;
+    private boolean isWhite;
 
     public Square(int index) {
         this.index = index;
         this.isHighlighted = false;
         this.isOccupied = false;
         this.piece = null;
+
     }
 
     public int getIndex() {
@@ -52,4 +56,11 @@ public class Square extends JLabel {
     public boolean hasPiece() {
         return piece != null;
     }
+
+    public void removePiece() {
+        this.piece = null;
+        this.setIcon(null);
+    }
+
+
 }

@@ -1,8 +1,16 @@
 package Pieces.piece;
 
-public class Piece  {
+import Board.Square;
+import Movable.possibleMoves;
+
+import javax.swing.*;
+import java.util.Vector;
+
+public class Piece extends possibleMoves {
+
     boolean isWhite;
     String path;
+    Vector<Integer> possible_Moves ;
 
 
     public Piece(boolean isWhite) {
@@ -12,10 +20,23 @@ public class Piece  {
     {
         this.path = path;
     }
-    String getPath()
+    public String getPath()
     {
         return path;
     }
+    public boolean isWhite()
+    {
+        return this.isWhite;
+    }
 
 
+
+    public void findMoves(int index , Square[] squares, int[] gameBoard) {
+
+    }
+
+
+    public Vector<Integer> getPossibleMoves() {
+        return this.possible_Moves;
+    }
 }

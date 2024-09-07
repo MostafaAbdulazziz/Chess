@@ -50,13 +50,16 @@ public class HighlightManager {
                 public void mouseExited(MouseEvent e) {
 
                     Border border = (Border) squares[finalI].getBorder();
-                    Color borderColor = ((LineBorder) border).getLineColor();
-                    // Remove the border when the mouse exits
+                    if(border != null)
+                    {
+                        Color borderColor = ((LineBorder) border).getLineColor();
                     if (borderColor != Color.GREEN)
                     {
                         squares[finalI].repaint();
                         squares[finalI].setBorder(null);
                     }
+                    }
+                    // Remove the border when the mouse exits
                 }
             });
 

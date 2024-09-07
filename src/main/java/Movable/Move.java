@@ -1,31 +1,46 @@
 package Movable;
 
-import Pieces.piece.Piece;
 import Board.Square;
 
 public class Move {
     private int from;
     private int to;
-    Square[] board;
+    private Square[] board;
+    private int[] GameBoard;
 
-    public Move(int from, int to,Square[] board) {
+    public Move() {
+    }
+
+    public Move(int from, int to, Square[] board, int[] GameBoard) {
         this.from = from;
         this.to = to;
         this.board = board;
-        Piece piece = board[from].getPiece();
-        board[to].setPiece(piece);
-        board[from].setPiece(null);
+        this.GameBoard = GameBoard;
+        move(from, to);
     }
 
-    public int getFrom() {
-        return from;
+    public boolean isMoveValid() {
+        board[from].getPiece().findMoves(from,board,GameBoard);
+        System.out.println(board[from].getPiece().isWhite());
+        return board[from].getPiece().getPossibleMoves().contains(to) && (board[from].getPiece().isWhite() && GameBoard[board[to].getIndex()] > 6);
     }
 
-    public int getTo() {
-        return to;
+    public void move(int from, int to) {
+        if (isMoveValid()) {
+            board[to].setPiece(board[from].getPiece());  // Move piece
+            board[from].removePiece();
+            int temp = GameBoard[board[to].getIndex()];
+            GameBoard[board[to].getIndex()] = GameBoard[board[from].getIndex()];
+            GameBoard[board[from].getIndex()] = temp;
+        }
     }
 
     public Square[] getBoard() {
+
         return board;
+    }
+    public int[] getGameBoard()
+    {
+        return this.GameBoard;
     }
 }

@@ -11,9 +11,9 @@ public class GameWindow extends JFrame {
     public GameWindow() {
         this.board = new BoardSetup();
         backgroundLabel = new JLabel();
-        this.setSize(1500, 820);
+        this.setSize(1000, 820);
         this.setLayout(null);
-        board.setBounds(390, 50, 720, 720);
+        board.setBounds(190, 50, 720, 720);
         backgroundLabel.add(board);
         this.add(backgroundLabel);
         backgroundLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
@@ -21,6 +21,7 @@ public class GameWindow extends JFrame {
         this.setTitle("Board");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+        this.setResizable(true);
 
 
     }

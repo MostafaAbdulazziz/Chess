@@ -22,7 +22,10 @@ public class Move {
     public boolean isMoveValid() {
         board[from].getPiece().findMoves(from,board,GameBoard);
         System.out.println(board[from].getPiece().isWhite());
-        return board[from].getPiece().getPossibleMoves().contains(to) && (board[from].getPiece().isWhite() && GameBoard[board[to].getIndex()] > 6);
+
+        return board[from].getPiece().getPossibleMoves().contains(to) &&
+                (board[from].getPiece().isWhite() && GameBoard[board[to].getIndex()] > 6 ||
+                        !board[from].getPiece().isWhite() && (GameBoard[board[to].getIndex()] <= 6  || GameBoard[board[to].getIndex()] == 100));
     }
 
     public void move(int from, int to) {

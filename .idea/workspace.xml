@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9930a20-a7ef-4956-b6c7-d75dbc1ba0ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/sources/ChessWallpaper.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Bishop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Queen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Rook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Game/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +43,7 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2likjgHGAcG8nry8x61tTE1DDcu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

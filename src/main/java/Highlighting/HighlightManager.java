@@ -1,6 +1,10 @@
-package org.example;
+package Highlighting;
+
+import Board.Square;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,7 +13,7 @@ import java.awt.event.MouseEvent;
 public class HighlightManager {
     public HighlightManager() {
     }
-    public JLabel[] addHighlightFeature(JLabel[] squares) {
+    public Square[] addHighlightFeature(Square[] squares) {
         for (int i = 0; i < 64; ++i) {
 
             int finalI = i;
@@ -34,16 +38,28 @@ public class HighlightManager {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     // Highlight the label by setting a border
-                    squares[finalI].setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.BLUE)); // Yellow dashed marker
-                    squares[finalI].revalidate();
-                    squares[finalI].repaint();
+                    if (squares[finalI].getBorder() == null )
+                    {
+                        squares[finalI].setBorder(BorderFactory.createLineBorder(Color.BLUE,3)); // Yellow dashed marker
+                        squares[finalI].revalidate();
+                        squares[finalI].repaint();
+                    }
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
+
+                    Border border = (Border) squares[finalI].getBorder();
+                    if(border != null)
+                    {
+                        Color borderColor = ((LineBorder) border).getLineColor();
+                    if (borderColor != Color.GREEN)
+                    {
+                        squares[finalI].repaint();
+                        squares[finalI].setBorder(null);
+                    }
+                    }
                     // Remove the border when the mouse exits
-                    squares[finalI].repaint();
-                    squares[finalI].setBorder(null);
                 }
             });
 

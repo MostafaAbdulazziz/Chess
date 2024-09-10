@@ -151,11 +151,7 @@ public class BoardSetup extends JLabel {
                     updateBoard();
 
                 }
-               else
-                {
-                    squares[KingIdx].setBackground(Color.GREEN);
-                    updateBoard();
-                }
+
 
             }
         }

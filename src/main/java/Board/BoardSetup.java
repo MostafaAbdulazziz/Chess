@@ -102,7 +102,7 @@ public class BoardSetup extends JLabel {
                     new HashSet<>(prevPossibleMoves).containsAll(squares[from].getPiece().getPossibleMoves());
 
                     for (int move : squares[from].getPiece().getPossibleMoves()) {
-                        squares[move].setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
+                        squares[move].setBorder(BorderFactory.createLineBorder(Color.green, 3));
                     }
                     updateBoard();
                 } else {
@@ -119,7 +119,7 @@ public class BoardSetup extends JLabel {
             }
             updateBoard();
 
-            if (from != to) {
+            if (from != to && squares[from].getPiece().getPossibleMoves().contains(to)) {
                 Move move = new Move(from, to, squares, GameBoard);
                 squares = move.getBoard();
                 this.GameBoard = move.getGameBoard();
@@ -128,11 +128,14 @@ public class BoardSetup extends JLabel {
                 System.out.println("Moved piece from square " + from + " to " + to);
 
                 // Switch turns after a successful move
-                isWhiteTurn = !isWhiteTurn;
+                if (move.isBoardChanged())
+                {
+                    isWhiteTurn = !isWhiteTurn;
+                }
                 System.out.println("Now it's " + (isWhiteTurn ? "white" : "black") + "'s turn.");
 
                 // Notify the GameWindow to switch the timers
-                if (onTurnSwitch != null) {
+                if (onTurnSwitch != null ) {
                     onTurnSwitch.run();
                 }
             }

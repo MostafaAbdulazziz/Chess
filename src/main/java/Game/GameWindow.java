@@ -36,7 +36,7 @@ public class GameWindow extends JPanel {
         sidePanel = new JPanel();
         sidePanel.setLayout(null);
         sidePanel.setBounds(0, 0, 200, 820); // Left side panel, within the background bounds
-        sidePanel.setBackground(new Color(230, 230, 250)); // Light background for the side panel
+        sidePanel.setBackground(new Color(224, 171, 124)); // Light background for the side panel
 
         // Add Exit Game button
         exitGameButton = new JButton("Exit Game");
@@ -51,6 +51,7 @@ public class GameWindow extends JPanel {
                         "Exit Game",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE
+
                 );
 
                 if (result == JOptionPane.YES_OPTION) {
@@ -61,17 +62,44 @@ public class GameWindow extends JPanel {
         });
         sidePanel.add(exitGameButton);
 
+        JButton restartGameButton = new JButton("Restart Game");
+        restartGameButton.setBounds(20, 200, 160, 30);
+        restartGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Show a confirmation dialog when the Restart Game button is clicked
+                int result = JOptionPane.showConfirmDialog(
+                        GameWindow.this,
+                        "Are you sure you want to restart the game?",
+                        "Restart Game",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+
+                );
+
+                if (result == JOptionPane.YES_OPTION) {
+                    resetBoard(); // Reset the board to its initial state
+                    restartTimers();
+                }
+            }
+        });
+        sidePanel.add(restartGameButton);
+
+
+
         // White player timer
         whiteTimerLabel = new JLabel("White: 00:00");
         whiteTimerLabel.setBounds(20, 100, 160, 30);
-        whiteTimerLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        whiteTimerLabel.setFont(new Font("MV Boli", Font.BOLD, 16));
+        whiteTimerLabel.setForeground(Color.BLACK);
         whiteTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         sidePanel.add(whiteTimerLabel);
 
         // Black player timer
         blackTimerLabel = new JLabel("Black: 00:00");
         blackTimerLabel.setBounds(20, 150, 160, 30);
-        blackTimerLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        blackTimerLabel.setFont(new Font("MV Boli", Font.BOLD, 16));
+        blackTimerLabel.setForeground(Color.BLACK);
         blackTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         sidePanel.add(blackTimerLabel);
 
@@ -94,7 +122,7 @@ public class GameWindow extends JPanel {
                 this,
                 "Set timer (in minutes) for each player:",
                 "Timer Setup",
-                JOptionPane.PLAIN_MESSAGE
+                JOptionPane.QUESTION_MESSAGE
         );
 
         if (input != null && !input.isEmpty()) {
@@ -184,8 +212,13 @@ public class GameWindow extends JPanel {
         backgroundLabel.repaint();
 
         // Reset timers to default or user-defined value
+
+    }
+    public void restartTimers()
+    {
         whiteTimer.stop();
         blackTimer.stop();
+        this.showTimerSetupDialog();
     }
 
     // End the game when time runs out

@@ -47,20 +47,26 @@ public class Knight extends Piece {
         return row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE;
     }
 
-    private boolean addIfValid(int targetIndex) {
+    private void addIfValid(int targetIndex) {
 
         if (squares[targetIndex].getPiece() == null) {
-            super.possible_Moves.add(targetIndex);        // Check if the square is empty
-            return false;  // Continue (for knight, this won't loop)
+            super.possible_Moves.add(targetIndex);
+            return ;
         }
 
 
         if (squares[targetIndex].getPiece().isWhite() != this.isWhite()) {
-            super.possible_Moves.add(targetIndex);// If there's an enemy piece, add the move
+            super.possible_Moves.add(targetIndex);
         }
 
-        return true;
+        return ;
     }
+
+
+
+
+
+
 
     @Override
     public Vector<Integer> getPossibleMoves() {

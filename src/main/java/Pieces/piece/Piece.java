@@ -59,6 +59,6 @@ public class Piece extends possibleMoves {
     }
 
     public boolean isChecked(int kingIdx, Square[] squares, int[] gameBoard, boolean isWhiteKing) {
-        return true;
+        return false;
     }
 }

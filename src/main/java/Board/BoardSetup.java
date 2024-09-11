@@ -1,7 +1,9 @@
 package Board;
 
+import Game.GameWindow;
 import Highlighting.HighlightManager;
 import Movable.Move;
+import Pieces.piece.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +15,7 @@ import java.util.Vector;
 public class BoardSetup extends JLabel {
     private Square[] squares = new Square[64];
     protected int[] GameBoard = new int[64];
+    GameWindow gameWindow;
     int from = -1;
     int to = -1;
     boolean selected = false;  // To track if a piece is selected
@@ -36,7 +39,8 @@ public class BoardSetup extends JLabel {
         this.squares = squares;
     }
 
-    public BoardSetup() {
+    public BoardSetup(GameWindow gameWindow) {
+        this.gameWindow = gameWindow;
         this.setOpaque(true);
         this.setLayout(new GridLayout(8, 8));
         this.setBorder(BorderFactory.createLineBorder(new Color(63, 39, 7), 5));
@@ -116,7 +120,7 @@ public class BoardSetup extends JLabel {
             for (int i = 0; i < 64; i++) {
                 squares[i].setBorder(null);
             }
-            updateBoard();
+
             if (from != to && squares[from].getPiece().getPossibleMoves().contains(to)) {
                 Move move = new Move(from, to, squares, GameBoard);
                 squares = move.getBoard();
@@ -126,39 +130,69 @@ public class BoardSetup extends JLabel {
                 System.out.println("Moved piece from square " + from + " to " + to);
 
                 // Switch turns after a successful move
-                if (move.isBoardChanged())
-                {
+                if (move.isBoardChanged()) {
                     isWhiteTurn = !isWhiteTurn;
                 }
                 System.out.println("Now it's " + (isWhiteTurn ? "white" : "black") + "'s turn.");
 
                 // Notify the GameWindow to switch the timers
-                if (onTurnSwitch != null  && move.isBoardChanged()) {
+                if (onTurnSwitch != null && move.isBoardChanged()) {
                     onTurnSwitch.run();
                 }
-                int KingIdx = 0;
-                for (int i = 0; i < 64; i++) {
-                    if ((!squares[to].getPiece().isWhite() && GameBoard[i] == 6) || (squares[to].getPiece().isWhite() && GameBoard[i] == 66)) {
-                        KingIdx = i;
-                        break;
-                    }
-                }
-                squares[KingIdx].getPiece().findMoves(KingIdx, squares, GameBoard);
-                if(squares[KingIdx].getPiece().getPossibleMoves().isEmpty() && squares[KingIdx].getPiece().isChecked(KingIdx, squares, GameBoard,squares[KingIdx].getPiece().isWhite()))
-                {
-                    squares[KingIdx].setBackground(Color.RED);
-                    System.out.println("Checkmate");
-                    updateBoard();
+                if (move.isBoardChanged()) {
+                    isCheckmate(squares[to].getPiece().isWhite());
+
+                }if (move.isBoardChanged()) {
+                    isCheck(squares[to].getPiece().isWhite());
 
                 }
 
 
             }
+            checkPawnPromotionAfterMove(to);
         }
     }
 
+    private void checkPawnPromotionAfterMove(int index) {
+        Piece piece = squares[index].getPiece();
+        if (piece instanceof Pawn) {
+            if ((piece.isWhite() && index / 8 == 0) || (!piece.isWhite() && index / 8 == 7)) {
+                // Use showOptionDialog to present options as buttons
+                String[] options = {"Queen", "Rook", "Bishop", "Knight"};
+                int choice = JOptionPane.showOptionDialog(this, "Promote your pawn to:", "Pawn Promotion", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+                // Default to Queen if the dialog is closed or no selection is made
+                String promotionChoice = (choice >= 0 && choice < options.length) ? options[choice].toLowerCase() : "queen";
+
+                Piece newPiece;
+                switch (promotionChoice) {
+                    case "rook":
+                        newPiece = new Rook(piece.isWhite());
+                        break;
+                    case "bishop":
+                        newPiece = new Bishop(piece.isWhite());
+                        break;
+                    case "knight":
+                        newPiece = new Knight(piece.isWhite());
+                        break;
+                    case "queen":
+                    default:
+                        newPiece = new Queen(piece.isWhite());  // Default promotion is to Queen
+                        break;
+                }
+
+                // Replace the pawn with the chosen piece
+                squares[index].setPiece(newPiece);
+
+                // Refresh the board UI
+                updateBoard();
+            }
+        }
+    }
+
+
     // Update board UI after move
-    private void updateBoard() {
+    public void updateBoard() {
         this.removeAll();
         for (Square square : squares) {
             this.add(square);
@@ -166,8 +200,66 @@ public class BoardSetup extends JLabel {
         this.revalidate();
         this.repaint();
     }
-//    void isCheckMate() {
-//        for()
-//    }
 
-}
+    public int[] getGameBoard() {
+        return GameBoard;
+    }
+
+    void isCheckmate(boolean isWhite) {
+        int KingIdx = 0;
+        for (int i = 0; i < 64; i++) {
+            if ((isWhite && GameBoard[i] == 66) || (!isWhite && GameBoard[i] == 6)) {
+                KingIdx = i;
+                break;
+            }
+        }
+        if (squares[KingIdx].getPiece() != null)
+            squares[KingIdx].getPiece().findMoves(KingIdx, squares, GameBoard);
+        if (squares[KingIdx].getPiece() != null && squares[KingIdx].getPiece().getPossibleMoves().isEmpty() && squares[KingIdx].getPiece().isChecked(KingIdx, squares, GameBoard, squares[KingIdx].getPiece().isWhite())) {
+            squares[KingIdx].setBackground(Color.RED);
+            System.out.println("Checkmate");
+            updateBoard();
+            if(squares[KingIdx].getPiece().isWhite()){
+                gameWindow.endGame("Black Wins");
+                gameWindow.restartTimers();
+            }
+            else{
+                gameWindow.endGame("White Wins");
+                gameWindow.restartTimers();
+
+            }
+
+
+        }
+
+    }
+    void isCheck(boolean isWhite) {
+        int KingIdx = 0;
+        for (int i = 0; i < 64; i++) {
+            if ((isWhite && GameBoard[i] == 66) || (!isWhite && GameBoard[i] == 6)) {
+                KingIdx = i;
+                break;
+            }
+        }
+        if (squares[KingIdx].getPiece() != null)
+            squares[KingIdx].getPiece().findMoves(KingIdx, squares, GameBoard);
+        if (squares[KingIdx].getPiece() != null &&  squares[KingIdx].getPiece().isChecked(KingIdx, squares, GameBoard, squares[KingIdx].getPiece().isWhite())) {
+            squares[KingIdx].setBorder(BorderFactory.createLineBorder(Color.RED, 6));
+            System.out.println("Check");
+            updateBoard();
+
+            }
+
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+

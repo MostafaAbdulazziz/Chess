@@ -2,10 +2,17 @@ package Game;
 
 import Board.BoardSetup;
 
+import Board.BoardSetup;
+import Pieces.piece.Piece;
+import Pieces.piece.Rook;
+import Pieces.piece.Bishop;
+import Pieces.piece.Knight;
+import Pieces.piece.Queen;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 public class GameWindow extends JPanel {
     private BoardSetup board;
@@ -23,7 +30,7 @@ public class GameWindow extends JPanel {
     private boolean isWhiteTurn = true; // To track the current player's turn
 
     public GameWindow(CardLayout cardLayout, JPanel mainPanel) {
-        this.board = new BoardSetup();
+        this.board = new BoardSetup(this);
 
         backgroundLabel = new JLabel();
         this.setLayout(null);
@@ -204,7 +211,7 @@ public class GameWindow extends JPanel {
 
     // Method to reset the chess board
     private void resetBoard() {
-        this.board = new BoardSetup();
+        this.board = new BoardSetup(this);
         board.setBounds(200, 50, 720, 720);
         backgroundLabel.removeAll();
         backgroundLabel.add(board);
@@ -222,10 +229,79 @@ public class GameWindow extends JPanel {
     }
 
     // End the game when time runs out
-    private void endGame(String message) {
+    public void endGame(String message) {
         JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
         resetBoard();
     }
+
+    public String showPromotionDialog() {
+        String[] options = {"Queen", "Rook", "Bishop", "Knight"};
+        int choice = JOptionPane.showOptionDialog(
+                this,
+                "Choose the piece to promote your pawn to:",
+                "Pawn Promotion",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
+        // Return the chosen piece based on the selected option
+        if (choice == JOptionPane.CLOSED_OPTION) {
+            return "Queen";  // Default to Queen if the dialog is closed
+        }
+
+        return options[choice];
+    }
+
+    public void promotePawn(int index , boolean isWhite) {
+        String promotionChoice = showPromotionDialog();
+        Piece newPiece;
+
+        switch (promotionChoice.toLowerCase()) {
+            case "rook":
+                newPiece = new Rook(isWhite);
+                break;
+            case "bishop":
+                newPiece = new Bishop(isWhite);
+                break;
+            case "knight":
+                newPiece = new Knight(isWhite);
+                break;
+            case "queen":
+            default:
+                newPiece = new Queen(isWhite);
+                break;
+        }
+
+        // Replace the pawn with the new piece in the squares array
+        board.getSquares()[index].setPiece(newPiece);
+
+        // Update GameBoard array to reflect the new piece's type
+        int pieceType = 0; // Assign a corresponding integer type for each piece (e.g., Queen = 5)
+        if (newPiece instanceof Queen) {
+            pieceType = isWhite ? 9 : -9;
+        } else if (newPiece instanceof Rook) {
+            pieceType = isWhite ? 4 : -4;
+        } else if (newPiece instanceof Bishop) {
+            pieceType = isWhite ? 3 : -3;
+        } else if (newPiece instanceof Knight) {
+            pieceType = isWhite ? 2 : -2;
+        }
+
+        board.getGameBoard()[index] = pieceType;  // Update gameBoard with the new piece
+
+        board.updateBoard();  // Update the board UI to reflect the change
+    }
+
+
+
+
+
+
+
+
 
     void displayBoard() {
         this.setVisible(true);

@@ -23,7 +23,7 @@ public class Move {
         this.to = to;
         this.board = board;
         this.GameBoard = GameBoard;
-        findKingIdx(board[from].getPiece().isWhite());
+        findKingIdx(board[from].getPiece().isWhite() , GameBoard);
         move(from, to);
     }
 
@@ -50,7 +50,7 @@ public class Move {
 
 
 
-    void findKingIdx(boolean isWhite) {
+    void findKingIdx(boolean isWhite , int[] GameBoard) {
         for (int i = 0; i < 64; i++) {
             if ((isWhite && GameBoard[i] == 6) || (!isWhite && GameBoard[i] == 66)) {
                 this.KingIdx = i;
@@ -107,7 +107,7 @@ public class Move {
         pos[from] = 100;
         temp[to].setPiece(temp[from].getPiece());
         temp[from].setPiece(null);
-        findKingIdx(isWhiteKing);
+        findKingIdx(isWhiteKing,pos);
 
 
 

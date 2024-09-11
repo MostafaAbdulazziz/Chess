@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f23d856-6c8a-4d0e-bacb-06d42943fc50" name="Changes" comment="Adding all resources">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/154750.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/gg.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/MainMenu.java" afterDir="false" />
-    </list>
+    <list default="true" id="1f23d856-6c8a-4d0e-bacb-06d42943fc50" name="Changes" comment="Adding all resources" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,7 +90,7 @@
       <updated>1725300681927</updated>
       <workItem from="1725300682796" duration="3576000" />
       <workItem from="1725311987288" duration="2652000" />
-      <workItem from="1726053769319" duration="16578000" />
+      <workItem from="1726053769319" duration="17061000" />
     </task>
     <task id="LOCAL-00001" summary="first change">
       <option name="closed" value="true" />

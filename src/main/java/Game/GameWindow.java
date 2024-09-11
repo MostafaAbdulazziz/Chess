@@ -36,14 +36,14 @@ public class GameWindow extends JPanel {
         this.setLayout(null);
 
         // Set up the chess board, shifted to the left
-        board.setBounds(200, 50, 720, 720); // Shifted to the left to make room for the side panel
+        board.setBounds(250, 25, 720, 720); // Shifted to the left to make room for the side panel
         backgroundLabel.add(board);
 
         // Create side panel for the Exit Game button and timers on the left
         sidePanel = new JPanel();
         sidePanel.setLayout(null);
         sidePanel.setBounds(0, 0, 200, 820); // Left side panel, within the background bounds
-        sidePanel.setBackground(new Color(224, 171, 124)); // Light background for the side panel
+        sidePanel.setBackground(new Color(123, 0, 255, 0)); // Light background for the side panel
 
         // Add Exit Game button
         exitGameButton = new JButton("Exit Game");
@@ -112,7 +112,7 @@ public class GameWindow extends JPanel {
 
         // Set background properties
         backgroundLabel.setBounds(0, 0, 1000, 820);
-        backgroundLabel.setIcon(new ImageIcon("src\\sources\\galaxy (2).jpg"));
+        backgroundLabel.setIcon(new ImageIcon("src\\main\\resources\\154750.jpg"));
 
         // Add components to the main panel
         this.add(sidePanel);

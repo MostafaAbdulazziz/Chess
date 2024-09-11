@@ -43,12 +43,12 @@ public class BoardSetup extends JLabel {
         this.gameWindow = gameWindow;
         this.setOpaque(true);
         this.setLayout(new GridLayout(8, 8));
-        this.setBorder(BorderFactory.createLineBorder(new Color(63, 39, 7), 5));
-        this.setIcon(new ImageIcon("src\\sources\\Mainlbl.jpg"));
+//        this.setBorder(BorderFactory.createLineBorder(new Color(63, 39, 7), 5));
+//        this.setIcon(new ImageIcon("src\\sources\\Mainlbl.jpg"));
         this.setOpaque(false);
 
-        Color lightWooden = new Color(222, 184, 135);
-        Color darkWooden = new Color(139, 69, 19);
+        Color lightWooden = new Color(255, 255, 255);
+        Color darkWooden = new Color(123, 0, 255);
         Color[] colors = {lightWooden, darkWooden};
         int id = 0, cnt = 0;
         for (int i = 0; i < 8; i++) {

@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f23d856-6c8a-4d0e-bacb-06d42943fc50" name="Changes" comment="Adding all resources">
-      <change afterPath="$PROJECT_DIR$/src/sources/modernMenu.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/MainMenu.java" afterDir="false" />
-    </list>
+    <list default="true" id="1f23d856-6c8a-4d0e-bacb-06d42943fc50" name="Changes" comment="Adding all resources" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,7 +92,7 @@
       <workItem from="1725300682796" duration="3576000" />
       <workItem from="1725311987288" duration="2652000" />
       <workItem from="1726053769319" duration="12360000" />
-      <workItem from="1726073826830" duration="420000" />
+      <workItem from="1726073826830" duration="1270000" />
     </task>
     <task id="LOCAL-00001" summary="first change">
       <option name="closed" value="true" />

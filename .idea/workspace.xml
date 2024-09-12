@@ -5,12 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f23d856-6c8a-4d0e-bacb-06d42943fc50" name="Changes" comment="Adding all resources">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Game/FuturisticButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/22379951_6544097 (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/22379951_6544097.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/3d-old-wooden-table-looking-out-stone-wall (3).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/photorealistic-galaxy-background (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/photorealistic-galaxy-background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/watercolour_night_sky_background_2607.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wood-material-background-wallpaper-texture-concept (2) (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wood-material-background-wallpaper-texture-concept (2).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-floor-with-blackboard (12).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-floor-with-blackboard (2).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-sign-hanging-from-rope (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-sign-hanging-from-rope__1_-removebg-preview (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-sign__2_-removebg-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-texture-looking-out-brown-striped-wall (1).jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/Square.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Highlighting/HighlightManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Highlighting/HighlightManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Movable/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Movable/Move.java" afterDir="false" />
     </list>
@@ -58,25 +69,26 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Aboelanwar/Chess/src/sources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/mosta/Chess/src/main/java/org/example/Main.java",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mosta/Chess/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/mosta/Chess/src/main/java/org/example/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mosta\Chess\src\main\resources" />
       <recent name="C:\Users\Aboelanwar\Chess\src\sources" />
     </key>
   </component>
@@ -112,6 +124,8 @@
       <workItem from="1726087147685" duration="136000" />
       <workItem from="1726087299940" duration="29000" />
       <workItem from="1726087343193" duration="9169000" />
+      <workItem from="1726140486981" duration="10778000" />
+      <workItem from="1726155926992" duration="4149000" />
     </task>
     <task id="LOCAL-00001" summary="first change">
       <option name="closed" value="true" />

@@ -43,14 +43,13 @@ public class BoardSetup extends JLabel {
 
     public BoardSetup(GameWindow gameWindow) {
         this.gameWindow = gameWindow;
-        this.setOpaque(true);
-        this.setLayout(new GridLayout(8, 8));
-//        this.setBorder(BorderFactory.createLineBorder(new Color(63, 39, 7), 5));
-//        this.setIcon(new ImageIcon("src\\sources\\Mainlbl.jpg"));
         this.setOpaque(false);
+        this.setLayout(new GridLayout(8, 8));
 
-        Color lightWooden = new Color(255, 255, 255, 255);
-        Color darkWooden = new Color(97, 50, 138, 255);
+
+        Color lightWooden = new Color(222, 184, 135);
+        Color darkWooden = new Color(139, 69, 19);
+
 
         Color[] colors = {lightWooden, darkWooden};
         int id = 0, cnt = 0;
@@ -88,6 +87,7 @@ public class BoardSetup extends JLabel {
         squares = highlightManager.addHighlightFeature(squares);
         GameBoard = pieceLoader.loadPositions(GameBoard);
         prevPossibleMoves = new Vector<>();
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
     }
 
     // Setter method to allow the GameWindow to pass the turn-switching callback
@@ -139,8 +139,9 @@ public class BoardSetup extends JLabel {
                 System.out.println("Moved piece from square " + from + " to " + to);
 
                 // Switch turns after a successful move
-                if (move.isBoardChanged()) {
+                if (move.isBoardChanged() && onTurnSwitch != null) {
                     isWhiteTurn = !isWhiteTurn;
+                    onTurnSwitch.run();
                     for (int i = 0; i < 64; i++) {
                         squares[i].setBorder(null);
                     }
@@ -148,21 +149,22 @@ public class BoardSetup extends JLabel {
                 System.out.println("Now it's " + (isWhiteTurn ? "white" : "black") + "'s turn.");
 
                 // Notify the GameWindow to switch the timers
-                if (onTurnSwitch != null) {
-                    onTurnSwitch.run();
+//                if (onTurnSwitch != null ) {
+//                    onTurnSwitch.run();
+//                }
+                boolean isCheck = false;
+                checkPawnPromotionAfterMove(to);
+                if (move.isBoardChanged()) {
+                    isCheck(!squares[to].getPiece().isWhite());
+
                 }
                 if (move.isBoardChanged()) {
                     isCheckmate(!squares[to].getPiece().isWhite());
 
                 }
-                if (move.isBoardChanged()) {
-                    isCheck(!squares[to].getPiece().isWhite());
-
-                }
 
 
             }
-            checkPawnPromotionAfterMove(to);
         }
     }
 
@@ -219,84 +221,98 @@ public class BoardSetup extends JLabel {
     }
 
     void isCheckmate(boolean isWhite) {
-        int kingIndex = findKingIndex(isWhite);
-        Piece king = squares[kingIndex].getPiece();
+        int KingIdx = 0;
+        for (int i = 0; i < 64; i++) {
+            if ((isWhite && GameBoard[i] == 6) || (!isWhite && GameBoard[i] == 66)) {
+                KingIdx = i;
+                break;
+            }
+        }
+        Square[] tempSquares = new Square[64];
+        int[] tempGameBoard = new int[64];
+        for (int i = 0; i < 64; i++) {
+            tempSquares[i] = new Square(i);
+            tempSquares[i].setPiece(squares[i].getPiece());
+            tempGameBoard[i] = GameBoard[i];
+        }
 
-        if (king != null) {
-            king.findMoves(kingIndex, squares, GameBoard);
-            boolean isInCheckmate = true;
-
-            // If king has no valid moves and is in check
-            if (king.getPossibleMoves().isEmpty() && king.isChecked(kingIndex, squares, GameBoard, isWhite)) {
-                Square[] tempSquares = new Square[64];
-                int[] tempGameBoard = new int[64];
-                for (int i = 0; i < 64; i++) {
-                    tempSquares[i] = new Square(i);
-                    tempSquares[i].setPiece(squares[i].getPiece());
-                    tempGameBoard[i] = GameBoard[i];
-                }
-                // Check if any other piece can make a valid move to prevent checkmate
-                for (int i = 0; i < 64; i++) {
-                    Piece piece = tempSquares[i].getPiece();
-                    if (piece != null && piece.isWhite() == isWhite) {
-                        piece.findMoves(i, tempSquares, tempGameBoard);
-                        for (int move : piece.getPossibleMoves()) {
-                            Move simulatedMove = new Move(i, move, tempSquares, tempGameBoard);
-                            if (simulatedMove.isMoveValid(i, move, tempSquares, tempGameBoard)) {
-                                isInCheckmate = false; // There's a move that can prevent checkmate
+        King king = (King) squares[KingIdx].getPiece();
+        boolean isCheckmate = true;
+        if (king != null)
+           king.findMoves(KingIdx, squares, GameBoard);
+        if (king != null && king.getPossibleMoves().isEmpty() && king.isChecked(KingIdx, tempSquares, tempGameBoard,king.isWhite())) {
+            {
+                for(int i = 0; i < 64; i++) {
+                    if (tempSquares[i].getPiece() != null && squares[i].getPiece().isWhite() == isWhite) {
+                        tempSquares[i].getPiece().findMoves(i, tempSquares, tempGameBoard);
+                        for (int move : squares[i].getPiece().getPossibleMoves()) {
+                            Move move1 = new Move(i, move, tempSquares, tempGameBoard);
+                            if (move1.isMoveValid(i, move, tempSquares, tempGameBoard)) {
+                                isCheckmate = false;
                                 break;
                             }
                         }
                     }
-                    if (!isInCheckmate) break;
                 }
-            } else {
-                isInCheckmate = false;
+            }
+            if (isCheckmate) {
+                squares[KingIdx].setBackground(Color.RED);
+                System.out.println("Checkmate");
+                updateBoard();
+                if (squares[KingIdx].getPiece().isWhite()) {
+                    gameWindow.endGame("Black Wins");
+//                gameWindow.restartTimers();
+                    gameWindow.stopTimers();
+                } else {
+                    gameWindow.endGame("White Wins");
+//                gameWindow.restartTimers();
+                    gameWindow.stopTimers();
+
+                }
             }
 
-            if (isInCheckmate) {
-                declareCheckmate(kingIndex, isWhite);
-            }
+
         }
+
     }
 
     void isCheck(boolean isWhite) {
-        int kingIndex = findKingIndex(isWhite);
-        Piece king = squares[kingIndex].getPiece();
-
-        if (king != null) {
-            king.findMoves(kingIndex, squares, GameBoard);
-            if (king.isChecked(kingIndex, squares, GameBoard, isWhite)) {
-                squares[kingIndex].setBorder(BorderFactory.createLineBorder(Color.RED, 6));
-                System.out.println("Check!");
-                updateBoard();
-            }
-        }
-    }
-
-    private int findKingIndex(boolean isWhite) {
+        int KingIdx = 0;
         for (int i = 0; i < 64; i++) {
             if ((isWhite && GameBoard[i] == 6) || (!isWhite && GameBoard[i] == 66)) {
-                return i;
+                KingIdx = i;
+                break;
             }
         }
-        return -1; // Default case, shouldn't happen
+        Square[] tempSquares = new Square[64];
+        int[] tempGameBoard = new int[64];
+        for (int i = 0; i < 64; i++) {
+            tempSquares[i] = new Square(i);
+            tempSquares[i].setPiece(squares[i].getPiece());
+            tempGameBoard[i] = GameBoard[i];
+        }
+        if (squares[KingIdx].getPiece() != null)
+            squares[KingIdx].getPiece().findMoves(KingIdx, tempSquares, tempGameBoard);
+        King king = (King) squares[KingIdx].getPiece();
+        if (king != null && king.isChecked(KingIdx, tempSquares, tempGameBoard, king.isWhite())) {
+            squares[KingIdx].setBorder(BorderFactory.createLineBorder(Color.RED, 6));
+            System.out.println("Check");
+            updateBoard();
+
+        }
+
+
     }
 
-    private void declareCheckmate(int kingIndex, boolean isWhite) {
-        squares[kingIndex].setBackground(Color.RED);
-        System.out.println("Checkmate!");
+    public void restartGame() {
+        this.removeAll();
+        squares = pieceLoader.loadPieces(squares);
+        squares = highlightManager.addHighlightFeature(squares);
+        GameBoard = pieceLoader.loadPositions(GameBoard);
         updateBoard();
-
-        // End the game and announce the winner
-        String winner = isWhite ? "Black Wins" : "White Wins";
-        gameWindow.endGame(winner);
-        gameWindow.stopTimers();
+        isWhiteTurn = true;
     }
-
-
 }
-
 
 
 

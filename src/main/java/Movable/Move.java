@@ -23,18 +23,26 @@ public class Move {
         this.to = to;
         this.board = board;
         this.GameBoard = GameBoard;
-        findKingIdx(board[from].getPiece().isWhite(), GameBoard);
+        if (board[from].getPiece() != null )findKingIdx(board[from].getPiece().isWhite(), GameBoard);
         move(from, to);
     }
 
     public boolean isMoveValid(int from, int to, Square[] board, int[] GameBoard) {
-        board[from].getPiece().findMoves(from, board, GameBoard);
-        System.out.println(board[from].getPiece().isWhite());
+        try {
+            board[from].getPiece().findMoves(from, board, GameBoard);
+            System.out.println(board[from].getPiece().isWhite());
 
         return board[from].getPiece().getPossibleMoves().contains(to) &&
                 (board[from].getPiece().isWhite() && GameBoard[board[to].getIndex()] > 6 ||
                         !board[from].getPiece().isWhite() && (GameBoard[board[to].getIndex()] <= 6 || GameBoard[board[to].getIndex()] == 100))
                 && !leadToCheck(from, to, board, board[from].getPiece().isWhite());
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error there are checkmate or check");
+            return true;
+        }
+
     }
 
     public void move(int from, int to) {

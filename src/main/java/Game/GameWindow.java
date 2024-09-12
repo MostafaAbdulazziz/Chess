@@ -1,13 +1,8 @@
 package Game;
 
 import Board.BoardSetup;
+import Pieces.piece.*;
 
-import Board.BoardSetup;
-import Pieces.piece.Piece;
-import Pieces.piece.Rook;
-import Pieces.piece.Bishop;
-import Pieces.piece.Knight;
-import Pieces.piece.Queen;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -39,16 +34,17 @@ public class GameWindow extends JPanel {
         board.setBounds(250, 25, 720, 720); // Shifted to the left to make room for the side panel
         backgroundLabel.add(board);
 
+
         // Create side panel for the Exit Game button and timers on the left
         sidePanel = new JLabel();
         sidePanel.setLayout(null);
-        sidePanel.setBounds(20, 20, 200, 300); // Left side panel, within the background bounds
-        sidePanel.setBackground(new Color(255, 255, 255)); // Light background for the side panel
-        sidePanel.setOpaque(true);
+        sidePanel.setBounds(20, 0, 200, 300); // Left side panel, within the background bounds
+        sidePanel.setIcon(new ImageIcon("src\\main\\resources\\wooden-sign-hanging-from-rope__1_-removebg-preview (1).png"));
+        sidePanel.setOpaque(false);
 
         // Add Exit Game button
         exitGameButton = new FuturisticButton("Exit Game");
-        exitGameButton.setBounds(25, 200, 160, 30); // Button in the side panel
+        exitGameButton.setBounds(30, 500, 160, 30); // Button in the side panel
         exitGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,10 +64,10 @@ public class GameWindow extends JPanel {
                 }
             }
         });
-        sidePanel.add(exitGameButton);
+//        sidePanel.add(exitGameButton);
 
         FuturisticButton restartGameButton = new FuturisticButton("Restart Game");
-        restartGameButton.setBounds(25, 160, 160, 30);
+        restartGameButton.setBounds(30, 460, 160, 30);
         restartGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,30 +87,41 @@ public class GameWindow extends JPanel {
                 }
             }
         });
-        sidePanel.add(restartGameButton);
+//        sidePanel.add(restartGameButton);
 
+
+        JLabel bottomLabel = new JLabel();
+        bottomLabel.setBounds(25, 380, 300, 300);
+        bottomLabel.setIcon(new ImageIcon("src\\main\\resources\\wooden-sign__2_-removebg-preview.png"));
+        bottomLabel.setOpaque(false);
+
+        bottomLabel.add(restartGameButton);
+        bottomLabel.add(exitGameButton);
+        this.add(bottomLabel);
+//        this.add(restartGameButton);
+//        this.add(exitGameButton);
 
 
         // White player timer
         whiteTimerLabel = new JLabel("White: 00:00");
-        whiteTimerLabel.setBounds(25, 50, 160, 30);
-        whiteTimerLabel.setFont(new Font("MV Boli", Font.BOLD, 16));
-        whiteTimerLabel.setForeground(Color.BLACK);
+        whiteTimerLabel.setBounds(25, 230, 160, 30);
+        whiteTimerLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
+        whiteTimerLabel.setForeground(Color.WHITE);
         whiteTimerLabel.setBackground(new Color(255, 255, 255, 0));
         whiteTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         sidePanel.add(whiteTimerLabel);
 
         // Black player timer
         blackTimerLabel = new JLabel("Black: 00:00");
-        blackTimerLabel.setBounds(25, 100, 160, 30);
-        blackTimerLabel.setFont(new Font("MV Boli", Font.BOLD, 16));
+        blackTimerLabel.setBounds(25, 190, 160, 30);
+        blackTimerLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
         blackTimerLabel.setForeground(Color.BLACK);
         blackTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         sidePanel.add(blackTimerLabel);
 
         // Set background properties
         backgroundLabel.setBounds(0, 0, 1000, 820);
-        backgroundLabel.setIcon(new ImageIcon("src\\main\\resources\\154750.jpg"));
+        backgroundLabel.setIcon(new ImageIcon("C:\\Users\\mosta\\Chess\\src\\main\\resources\\wooden-floor-with-blackboard (12).jpg"));
 
         // Add components to the main panel
         this.add(sidePanel);
@@ -223,8 +230,8 @@ public class GameWindow extends JPanel {
         // Reset timers to default or user-defined value
 
     }
-    public void restartTimers()
-    {
+
+    public void restartTimers() {
         whiteTimer.stop();
         blackTimer.stop();
         this.showTimerSetupDialog();
@@ -258,7 +265,7 @@ public class GameWindow extends JPanel {
         return options[choice];
     }
 
-    public void promotePawn(int index , boolean isWhite) {
+    public void promotePawn(int index, boolean isWhite) {
         String promotionChoice = showPromotionDialog();
         Piece newPiece;
 
@@ -297,11 +304,6 @@ public class GameWindow extends JPanel {
 
         board.updateBoard();  // Update the board UI to reflect the change
     }
-
-
-
-
-
 
 
     public void stopTimers() {

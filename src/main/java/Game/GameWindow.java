@@ -18,7 +18,7 @@ public class GameWindow extends JPanel {
     private BoardSetup board;
     private JLabel backgroundLabel;
     private JButton exitGameButton;
-    private JPanel sidePanel;
+    private JLabel sidePanel;
 
     // Timer variables
     private JLabel whiteTimerLabel;
@@ -40,14 +40,15 @@ public class GameWindow extends JPanel {
         backgroundLabel.add(board);
 
         // Create side panel for the Exit Game button and timers on the left
-        sidePanel = new JPanel();
+        sidePanel = new JLabel();
         sidePanel.setLayout(null);
-        sidePanel.setBounds(0, 0, 200, 820); // Left side panel, within the background bounds
-        sidePanel.setBackground(new Color(123, 0, 255, 0)); // Light background for the side panel
+        sidePanel.setBounds(20, 20, 200, 300); // Left side panel, within the background bounds
+        sidePanel.setBackground(new Color(255, 255, 255)); // Light background for the side panel
+        sidePanel.setOpaque(true);
 
         // Add Exit Game button
-        exitGameButton = new JButton("Exit Game");
-        exitGameButton.setBounds(20, 50, 160, 30); // Button in the side panel
+        exitGameButton = new FuturisticButton("Exit Game");
+        exitGameButton.setBounds(25, 200, 160, 30); // Button in the side panel
         exitGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,8 +70,8 @@ public class GameWindow extends JPanel {
         });
         sidePanel.add(exitGameButton);
 
-        JButton restartGameButton = new JButton("Restart Game");
-        restartGameButton.setBounds(20, 200, 160, 30);
+        FuturisticButton restartGameButton = new FuturisticButton("Restart Game");
+        restartGameButton.setBounds(25, 160, 160, 30);
         restartGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,15 +97,16 @@ public class GameWindow extends JPanel {
 
         // White player timer
         whiteTimerLabel = new JLabel("White: 00:00");
-        whiteTimerLabel.setBounds(20, 100, 160, 30);
+        whiteTimerLabel.setBounds(25, 50, 160, 30);
         whiteTimerLabel.setFont(new Font("MV Boli", Font.BOLD, 16));
         whiteTimerLabel.setForeground(Color.BLACK);
+        whiteTimerLabel.setBackground(new Color(255, 255, 255, 0));
         whiteTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         sidePanel.add(whiteTimerLabel);
 
         // Black player timer
         blackTimerLabel = new JLabel("Black: 00:00");
-        blackTimerLabel.setBounds(20, 150, 160, 30);
+        blackTimerLabel.setBounds(25, 100, 160, 30);
         blackTimerLabel.setFont(new Font("MV Boli", Font.BOLD, 16));
         blackTimerLabel.setForeground(Color.BLACK);
         blackTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -212,7 +214,7 @@ public class GameWindow extends JPanel {
     // Method to reset the chess board
     private void resetBoard() {
         this.board = new BoardSetup(this);
-        board.setBounds(200, 50, 720, 720);
+        board.setBounds(250, 25, 720, 720);
         backgroundLabel.removeAll();
         backgroundLabel.add(board);
         backgroundLabel.revalidate();
@@ -231,7 +233,8 @@ public class GameWindow extends JPanel {
     // End the game when time runs out
     public void endGame(String message) {
         JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
-        resetBoard();
+
+//        resetBoard();
     }
 
     public String showPromotionDialog() {
@@ -301,7 +304,10 @@ public class GameWindow extends JPanel {
 
 
 
-
+    public void stopTimers() {
+        whiteTimer.stop();
+        blackTimer.stop();
+    }
 
     void displayBoard() {
         this.setVisible(true);

@@ -40,7 +40,7 @@ public class HighlightManager {
                     // Highlight the label by setting a border
                     if (squares[finalI].getBorder() == null )
                     {
-                        squares[finalI].setBorder(BorderFactory.createLineBorder(new Color(238, 255, 0),3)); // Yellow dashed marker
+                        squares[finalI].setBorder(BorderFactory.createLineBorder(new Color(27, 140, 0),3)); // Yellow dashed marker
                         squares[finalI].revalidate();
                         squares[finalI].repaint();
                     }
@@ -48,19 +48,16 @@ public class HighlightManager {
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-
                     Border border = (Border) squares[finalI].getBorder();
-                    if(border != null)
-                    {
+                    if (border != null) {
                         Color borderColor = ((LineBorder) border).getLineColor();
-                    if (borderColor != Color.GREEN && borderColor != Color.RED)
-                    {
-                        squares[finalI].repaint();
-                        squares[finalI].setBorder(null);
+                        if (borderColor != Color.GREEN && borderColor != Color.RED) {
+                            squares[finalI].setBorder(null); // Remove border
+                            squares[finalI].repaint(); // Repaint the square to ensure visual reset
+                        }
                     }
-                    }
-                    // Remove the border when the mouse exits
                 }
+
             });
 
 

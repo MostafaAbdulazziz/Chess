@@ -23,11 +23,11 @@ public class Move {
         this.to = to;
         this.board = board;
         this.GameBoard = GameBoard;
-        findKingIdx(board[from].getPiece().isWhite() , GameBoard);
+        findKingIdx(board[from].getPiece().isWhite(), GameBoard);
         move(from, to);
     }
 
-    public boolean isMoveValid() {
+    public boolean isMoveValid(int from, int to, Square[] board, int[] GameBoard) {
         board[from].getPiece().findMoves(from, board, GameBoard);
         System.out.println(board[from].getPiece().isWhite());
 
@@ -38,19 +38,18 @@ public class Move {
     }
 
     public void move(int from, int to) {
-        if (isMoveValid()) {
+        if (isMoveValid(from, to, board, GameBoard)) {
             board[to].setPiece(board[from].getPiece());  // Move piece
             board[from].removePiece();
-            int temp = GameBoard[board[to].getIndex()];
+
             GameBoard[board[to].getIndex()] = GameBoard[board[from].getIndex()];
-            GameBoard[board[from].getIndex()] = temp;
+            GameBoard[board[from].getIndex()] = 100;
             this.boardChanged = true;
         }
     }
 
 
-
-    void findKingIdx(boolean isWhite , int[] GameBoard) {
+    void findKingIdx(boolean isWhite, int[] GameBoard) {
         for (int i = 0; i < 64; i++) {
             if ((isWhite && GameBoard[i] == 6) || (!isWhite && GameBoard[i] == 66)) {
                 this.KingIdx = i;
@@ -82,7 +81,7 @@ public class Move {
         for (int i = 0; i < 64; i++) {
             if (squares[i].getPiece() != null && squares[kingIdx].getPiece() != null && squares[i].getPiece().isWhite() != squares[kingIdx].getPiece().isWhite() && pos[i] != 66 && pos[i] != 6) {
                 squares[i].getPiece().findMoves(i, squares, pos);
-                if (squares[i].getPiece().getPossibleMoves().contains(kingIdx) ) {
+                if (squares[i].getPiece().getPossibleMoves().contains(kingIdx)) {
                     return true;
                 }
             }
@@ -107,12 +106,11 @@ public class Move {
         pos[from] = 100;
         temp[to].setPiece(temp[from].getPiece());
         temp[from].setPiece(null);
-        findKingIdx(isWhiteKing,pos);
-
+        findKingIdx(squares[from].getPiece().isWhite(), pos);
 
 
         // Check if the king is in check after this move
-        return isChecked(KingIdx, temp, pos, isWhiteKing);
+        return isChecked(this.KingIdx, temp, pos, isWhiteKing);
     }
 
 

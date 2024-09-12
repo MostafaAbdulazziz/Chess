@@ -3,6 +3,7 @@ package Board;
 import Pieces.piece.Piece;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -12,6 +13,8 @@ public class Square extends JLabel  {
     private boolean isOccupied;
     private Piece piece;
     private boolean isWhite;
+    private Color originalColor;
+
 
     public Square(int index) {
         this.index = index;
@@ -19,6 +22,15 @@ public class Square extends JLabel  {
         this.isOccupied = false;
         this.piece = null;
 
+    }
+
+    public void setOriginalColor(Color color) {
+        this.originalColor = color;
+        this.setBackground(color); // Set the initial background color
+    }
+
+    public Color getOriginalColor() {
+        return originalColor;
     }
 
     public int getIndex() {
@@ -61,6 +73,10 @@ public class Square extends JLabel  {
         this.piece = null;
         this.setIcon(null);
     }
+    public ImageIcon getIcon() {
+        return (ImageIcon) super.getIcon();
+    }
+
 
 
 }

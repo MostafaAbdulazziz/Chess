@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1f23d856-6c8a-4d0e-bacb-06d42943fc50" name="Changes" comment="Adding all resources">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Rook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +98,8 @@
       <workItem from="1726073826830" duration="1270000" />
       <workItem from="1726100499570" duration="440000" />
       <workItem from="1726100964953" duration="1424000" />
-      <workItem from="1726170082157" duration="9896000" />
+      <workItem from="1726170082157" duration="11208000" />
+      <workItem from="1726256513495" duration="440000" />
     </task>
     <task id="LOCAL-00001" summary="first change">
       <option name="closed" value="true" />

@@ -1,0 +1,452 @@
+Index: src/main/java/Pieces/piece/Knight.java
+===================================================================
+diff --git a/src/main/java/Pieces/piece/Knight.java b/src/main/java/Pieces/Knight.java
+rename from src/main/java/Pieces/piece/Knight.java
+rename to src/main/java/Pieces/Knight.java
+--- a/src/main/java/Pieces/piece/Knight.java	
++++ b/src/main/java/Pieces/Knight.java	
+@@ -1,4 +1,4 @@
+-package Pieces.piece;
++package Pieces;
+ 
+ import Board.Square;
+ 
+@@ -21,7 +21,7 @@
+     }
+ 
+     @Override
+-    public void findMoves(int index , Square[] squares,int[] gameBoard) {
++    public void findMoves(int index , Square[] squares, int[] gameBoard) {
+         this.startingIdx = index;
+         this.gameBoard = gameBoard;
+         this.squares = squares;
+@@ -41,14 +41,18 @@
+     }
+ 
+     private void addIfValid(int startRow, int startCol, int endRow, int endCol, int targetIndex) {
+-        // Check if the move stays within bounds of the board
+-        if (targetIndex >= 0 && targetIndex < 64 && isWithinBounds(startRow, endRow) && isWithinBounds(startCol, endCol)  && (squares[startingIdx].getPiece().isWhite() && gameBoard[targetIndex] > 6)) {
+-            super.possible_Moves.add(targetIndex);
++        // Ensure target is within bounds and within valid row/column shifts
++        if (targetIndex >= 0 && targetIndex < 64 && isWithinBounds(startRow, endRow) && isWithinBounds(startCol, endCol)) {
++            // Check if the target square is empty or contains an opponent's piece
++            if (gameBoard[targetIndex] == 0 || (squares[startingIdx].getPiece().isWhite() && gameBoard[targetIndex] > 6) ||
++                    (!squares[startingIdx].getPiece().isWhite() && gameBoard[targetIndex] <= 6 && gameBoard[targetIndex] != 0)) {
++                super.possible_Moves.add(targetIndex);
++            }
+         }
+     }
+ 
+     private boolean isWithinBounds(int start, int end) {
+-        return end >= 0 && end < BOARD_SIZE && Math.abs(start - end) <= 2;  // Maximum shift of 2 columns or rows for valid moves
++        return end >= 0 && end < BOARD_SIZE;  // Ensure the move stays within the board limits
+     }
+ 
+     @Override
+Index: src/main/java/Board/PiecesLoader.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Board;\r\n\r\nimport Pieces.piece.*;\r\n\r\npublic class PiecesLoader {\r\n    Square[] loadPieces(Square[] squares) {\r\n\r\n        squares[0].setPiece(new Rook(false));\r\n        squares[1].setPiece(new Knight(false));\r\n        squares[2].setPiece(new Bishop(false));\r\n        squares[3].setPiece(new Queen(false));\r\n        squares[4].setPiece(new King(false));\r\n        squares[5].setPiece(new Bishop(false));\r\n        squares[6].setPiece(new Knight(false));\r\n        squares[7].setPiece(new Rook(false));\r\n        for (int i = 8; i < 16; i++) {\r\n            squares[i].setPiece(new Pawn(false));\r\n        }\r\n        for (int i = 16; i < 48; i++) {\r\n            squares[i].setPiece(null);  // Empty squares\r\n        }\r\n        for (int i = 48; i < 56; i++) {\r\n            squares[i].setPiece(new Pawn(true));\r\n        }\r\n        squares[56].setPiece(new Rook(true));\r\n        squares[57].setPiece(new Knight(true));\r\n        squares[58].setPiece(new Bishop(true));\r\n        squares[59].setPiece(new Queen(true));\r\n        squares[60].setPiece(new King(true));\r\n        squares[61].setPiece(new Bishop(true));\r\n        squares[62].setPiece(new Knight(true));\r\n        squares[63].setPiece(new Rook(true));\r\n\r\n\r\n        return squares;\r\n    }\r\n    int[] loadPositions(int[] gameBoard)\r\n    {\r\n        gameBoard[0]=22;\r\n        gameBoard[1]=33;\r\n        gameBoard[2]=44;\r\n        gameBoard[3]=55;\r\n        gameBoard[4]=66;\r\n        gameBoard[5]=44;\r\n        gameBoard[6]=33;\r\n        gameBoard[7]=22;\r\n        for (int i = 8; i < 16; i++) {\r\n            gameBoard[i]= 11 ;\r\n        }\r\n        for (int i = 16; i < 48; i++) {\r\n            gameBoard[i]= 100;  // Empty gameBoard\r\n        }\r\n        for (int i = 48; i < 56; i++) {\r\n            gameBoard[i]=1;\r\n        }\r\n        gameBoard[56]=2;\r\n        gameBoard[57]=3;\r\n        gameBoard[58]=4;\r\n        gameBoard[59]=5;\r\n        gameBoard[60]=6;\r\n        gameBoard[61]=4;\r\n        gameBoard[62]=3;\r\n        gameBoard[63]=2;\r\n        return gameBoard;\r\n\r\n    }    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Board/PiecesLoader.java b/src/main/java/Board/PiecesLoader.java
+--- a/src/main/java/Board/PiecesLoader.java	
++++ b/src/main/java/Board/PiecesLoader.java	
+@@ -1,6 +1,7 @@
+ package Board;
+ 
+-import Pieces.piece.*;
++import Pieces.*;
++
+ 
+ public class PiecesLoader {
+     Square[] loadPieces(Square[] squares) {
+Index: src/main/java/Game/GameWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Game;\r\n\r\nimport Board.BoardSetup;\r\n\r\nimport javax.swing.*;\r\n\r\npublic class GameWindow extends JFrame {\r\n    private BoardSetup board;\r\n    JLabel backgroundLabel;\r\n\r\n    public GameWindow() {\r\n        this.board = new BoardSetup();\r\n        backgroundLabel = new JLabel();\r\n        this.setSize(1000, 820);\r\n        this.setLayout(null);\r\n        board.setBounds(190, 50, 720, 720);\r\n        backgroundLabel.add(board);\r\n        this.add(backgroundLabel);\r\n        backgroundLabel.setBounds(0, 0, this.getWidth(), this.getHeight());\r\n        backgroundLabel.setIcon(new ImageIcon(\"C:\\\\Users\\\\mosta\\\\Chess\\\\src\\\\sources\\\\galaxy (2).jpg\"));\r\n        this.setTitle(\"Board\");\r\n        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n        this.setVisible(true);\r\n        this.setResizable(true);\r\n\r\n\r\n    }\r\n    void displayBoard() {\r\n        this.setVisible(true);\r\n    }\r\n    void setBoard(BoardSetup board) {\r\n        this.board = board;\r\n    }\r\n    BoardSetup getBoard() {\r\n        return this.board;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Game/GameWindow.java b/src/main/java/Game/GameWindow.java
+--- a/src/main/java/Game/GameWindow.java	
++++ b/src/main/java/Game/GameWindow.java	
+@@ -5,16 +5,16 @@
+ import javax.swing.*;
+ 
+ public class GameWindow extends JFrame {
+-    private BoardSetup board;
++    private GameController gameController;
+     JLabel backgroundLabel;
+ 
+     public GameWindow() {
+-        this.board = new BoardSetup();
++        this.gameController = new GameController();
+         backgroundLabel = new JLabel();
+         this.setSize(1000, 820);
+         this.setLayout(null);
+-        board.setBounds(190, 50, 720, 720);
+-        backgroundLabel.add(board);
++        gameController.getBoardSetup().setBounds(190, 50, 720, 720);
++        backgroundLabel.add(gameController.getBoardSetup());
+         this.add(backgroundLabel);
+         backgroundLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
+         backgroundLabel.setIcon(new ImageIcon("C:\\Users\\mosta\\Chess\\src\\sources\\galaxy (2).jpg"));
+@@ -28,10 +28,5 @@
+     void displayBoard() {
+         this.setVisible(true);
+     }
+-    void setBoard(BoardSetup board) {
+-        this.board = board;
+-    }
+-    BoardSetup getBoard() {
+-        return this.board;
+-    }
++
+ }
+Index: src/main/java/Board/BoardSetup.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Board;\r\n\r\nimport Highlighting.HighlightManager;\r\nimport Movable.Move;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.event.MouseAdapter;\r\nimport java.awt.event.MouseEvent;\r\nimport java.util.HashSet;\r\nimport java.util.Vector;\r\n\r\npublic class BoardSetup extends JLabel{\r\n    private Square[] squares = new Square[64];\r\n    protected int[] GameBoard = new int[64];\r\n    int from = -1;\r\n    int to = -1;\r\n    boolean selected = false;  // To track if a piece is selected\r\n    PiecesLoader pieceLoader;\r\n    HighlightManager highlightManager;\r\n    Vector<Integer>prevPossibleMoves;\r\n\r\n    public JLabel getBoardSetup() {\r\n        return this;\r\n    }\r\n\r\n    public Square[] getSquares() {\r\n        return squares;\r\n    }\r\n\r\n    public void setSquares(Square[] squares) {\r\n        this.squares = squares;\r\n    }\r\n\r\n    public BoardSetup() {\r\n        this.setOpaque(true);\r\n        this.setLayout(new GridLayout(8, 8));\r\n        this.setBorder(BorderFactory.createLineBorder(new Color(63, 39, 7), 5));\r\n        this.setIcon(new ImageIcon(\"D:\\\\Programing\\\\JAVA GUI\\\\Board_GUI\\\\src\\\\sources\\\\Mainlbl.jpg\"));\r\n\r\n        this.setOpaque(false);\r\n\r\n        Color lightWooden = new Color(222, 184, 135);\r\n        Color darkWooden = new Color(139, 69, 19);\r\n        Color[] colors = {lightWooden, darkWooden};\r\n        int id = 0, cnt = 0;\r\n        for (int i = 0; i < 8; i++) {\r\n            for (int j = 0; j < 8; j++) {\r\n                Color c = colors[id % 2];\r\n                id++;\r\n\r\n                Square square = new Square(cnt);\r\n                square.setBackground(c);\r\n                square.setOpaque(true);\r\n                square.setHorizontalAlignment(square.CENTER);\r\n                square.setVerticalAlignment(square.CENTER);\r\n                square.setText(String.valueOf(cnt));\r\n                squares[cnt] = square;\r\n\r\n                square.addMouseListener(new MouseAdapter() {\r\n                    @Override\r\n                    public void mouseClicked(MouseEvent e) {\r\n                        handleSquareClick(square);\r\n                    }\r\n                });\r\n\r\n\r\n\r\n                this.add(square);\r\n                cnt++;\r\n            }\r\n            id++;\r\n        }\r\n\r\n        // Load pieces and highlight movement functionality\r\n\r\n        pieceLoader = new PiecesLoader();\r\n        highlightManager = new HighlightManager();\r\n        squares = (pieceLoader.loadPieces(squares));\r\n        squares = (highlightManager.addHighlightFeature(squares));\r\n        GameBoard = pieceLoader.loadPositions(GameBoard);\r\n        prevPossibleMoves = new Vector<Integer>();\r\n\r\n        // A\r\n\r\n    }\r\n\r\n    private void handleSquareClick(Square square) {\r\n        int index = square.getIndex();\r\n\r\n        if (!selected) {\r\n\r\n            from = index;\r\n            if (squares[from].hasPiece()) {\r\n                selected = true;\r\n                System.out.println(\"Piece selected from square: \" + from);\r\n                squares[index].getPiece().findMoves(index,squares,GameBoard);\r\n                new HashSet<>(prevPossibleMoves).containsAll(squares[index].getPiece().getPossibleMoves());\r\n\r\n                for(int move : squares[index].getPiece().getPossibleMoves())\r\n                {\r\n                    squares[move].setBorder(BorderFactory.createLineBorder(Color.GREEN,3));\r\n                }\r\n                updateBoard();\r\n\r\n            }\r\n        } else {\r\n            to = index;\r\n                selected = false;\r\n                for (int i =0 ; i<64;i++)\r\n                    squares[i].setBorder(null);\r\n                updateBoard();\r\n            if (from != to  ) {\r\n                Move move = new Move(from, to, squares,GameBoard);\r\n                squares = move.getBoard();\r\n                this.GameBoard = move.getGameBoard();\r\n                updateBoard();\r\n\r\n                System.out.println(\"Moved piece from square \" + from + \" to \" + to);\r\n            }\r\n        }\r\n    }\r\n\r\n    // Update board UI after move\r\n    private void updateBoard() {\r\n        this.removeAll();\r\n        for (Square square : squares) {\r\n            this.add(square);\r\n        }\r\n        this.revalidate();\r\n        this.repaint();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Board/BoardSetup.java b/src/main/java/Board/BoardSetup.java
+--- a/src/main/java/Board/BoardSetup.java	
++++ b/src/main/java/Board/BoardSetup.java	
+@@ -57,12 +57,7 @@
+                 square.setText(String.valueOf(cnt));
+                 squares[cnt] = square;
+ 
+-                square.addMouseListener(new MouseAdapter() {
+-                    @Override
+-                    public void mouseClicked(MouseEvent e) {
+-                        handleSquareClick(square);
+-                    }
+-                });
++
+ 
+ 
+ 
+@@ -79,50 +74,16 @@
+         squares = (pieceLoader.loadPieces(squares));
+         squares = (highlightManager.addHighlightFeature(squares));
+         GameBoard = pieceLoader.loadPositions(GameBoard);
+-        prevPossibleMoves = new Vector<Integer>();
+-
+-        // A
+-
+-    }
+-
+-    private void handleSquareClick(Square square) {
+-        int index = square.getIndex();
+ 
+-        if (!selected) {
+ 
+-            from = index;
+-            if (squares[from].hasPiece()) {
+-                selected = true;
+-                System.out.println("Piece selected from square: " + from);
+-                squares[index].getPiece().findMoves(index,squares,GameBoard);
+-                new HashSet<>(prevPossibleMoves).containsAll(squares[index].getPiece().getPossibleMoves());
++        // A
+ 
+-                for(int move : squares[index].getPiece().getPossibleMoves())
+-                {
+-                    squares[move].setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+-                }
+-                updateBoard();
++    }
+ 
+-            }
+-        } else {
+-            to = index;
+-                selected = false;
+-                for (int i =0 ; i<64;i++)
+-                    squares[i].setBorder(null);
+-                updateBoard();
+-            if (from != to  ) {
+-                Move move = new Move(from, to, squares,GameBoard);
+-                squares = move.getBoard();
+-                this.GameBoard = move.getGameBoard();
+-                updateBoard();
+ 
+-                System.out.println("Moved piece from square " + from + " to " + to);
+-            }
+-        }
+-    }
+ 
+     // Update board UI after move
+-    private void updateBoard() {
++    public void updateBoard() {
+         this.removeAll();
+         for (Square square : squares) {
+             this.add(square);
+@@ -130,4 +91,12 @@
+         this.revalidate();
+         this.repaint();
+     }
++
++    public int[] getGameBoard() {
++        return this.GameBoard;
++    }
++
++    public void setGameBoard(int[] gameBoard) {
++        this.GameBoard = gameBoard;
++    }
+ }
+Index: src/main/java/Movable/Move.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Movable;\r\n\r\nimport Board.Square;\r\n\r\npublic class Move {\r\n    private int from;\r\n    private int to;\r\n    private Square[] board;\r\n    private int[] GameBoard;\r\n\r\n    public Move() {\r\n    }\r\n\r\n    public Move(int from, int to, Square[] board, int[] GameBoard) {\r\n        this.from = from;\r\n        this.to = to;\r\n        this.board = board;\r\n        this.GameBoard = GameBoard;\r\n        move(from, to);\r\n    }\r\n\r\n    public boolean isMoveValid() {\r\n        board[from].getPiece().findMoves(from,board,GameBoard);\r\n        System.out.println(board[from].getPiece().isWhite());\r\n\r\n        return board[from].getPiece().getPossibleMoves().contains(to) &&\r\n                (board[from].getPiece().isWhite() && GameBoard[board[to].getIndex()] > 6 ||\r\n                        !board[from].getPiece().isWhite() && (GameBoard[board[to].getIndex()] <= 6  || GameBoard[board[to].getIndex()] == 100));\r\n    }\r\n\r\n    public void move(int from, int to) {\r\n        if (isMoveValid()) {\r\n            board[to].setPiece(board[from].getPiece());  // Move piece\r\n            board[from].removePiece();\r\n            int temp = GameBoard[board[to].getIndex()];\r\n            GameBoard[board[to].getIndex()] = GameBoard[board[from].getIndex()];\r\n            GameBoard[board[from].getIndex()] = temp;\r\n        }\r\n    }\r\n\r\n    public Square[] getBoard() {\r\n\r\n        return board;\r\n    }\r\n    public int[] getGameBoard()\r\n    {\r\n        return this.GameBoard;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Movable/Move.java b/src/main/java/Movable/Move.java
+--- a/src/main/java/Movable/Move.java	
++++ b/src/main/java/Movable/Move.java	
+@@ -22,19 +22,20 @@
+     public boolean isMoveValid() {
+         board[from].getPiece().findMoves(from,board,GameBoard);
+         System.out.println(board[from].getPiece().isWhite());
++//        return true;
+ 
+         return board[from].getPiece().getPossibleMoves().contains(to) &&
+                 (board[from].getPiece().isWhite() && GameBoard[board[to].getIndex()] > 6 ||
+-                        !board[from].getPiece().isWhite() && (GameBoard[board[to].getIndex()] <= 6  || GameBoard[board[to].getIndex()] == 100));
++                        !(board[from].getPiece().isWhite()) && (GameBoard[board[to].getIndex()] <= 6  || GameBoard[board[to].getIndex()] == 100));
+     }
+ 
+     public void move(int from, int to) {
+         if (isMoveValid()) {
+             board[to].setPiece(board[from].getPiece());  // Move piece
+             board[from].removePiece();
+-            int temp = GameBoard[board[to].getIndex()];
++
+             GameBoard[board[to].getIndex()] = GameBoard[board[from].getIndex()];
+-            GameBoard[board[from].getIndex()] = temp;
++            GameBoard[board[from].getIndex()] = 100;
+         }
+     }
+ 
+Index: src/main/java/Board/Square.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Board;\r\n\r\nimport Pieces.piece.Piece;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.event.MouseEvent;\r\nimport java.awt.event.MouseListener;\r\n\r\npublic class Square extends JLabel  {\r\n    private int index;\r\n    private boolean isHighlighted;\r\n    private boolean isOccupied;\r\n    private Piece piece;\r\n    private boolean isWhite;\r\n\r\n    public Square(int index) {\r\n        this.index = index;\r\n        this.isHighlighted = false;\r\n        this.isOccupied = false;\r\n        this.piece = null;\r\n\r\n    }\r\n\r\n    public int getIndex() {\r\n        return index;\r\n    }\r\n\r\n    public boolean isHighlighted() {\r\n        return isHighlighted;\r\n    }\r\n\r\n    public void setHighlighted(boolean highlighted) {\r\n        isHighlighted = highlighted;\r\n    }\r\n\r\n    public boolean isOccupied() {\r\n        return isOccupied;\r\n    }\r\n\r\n    public void setOccupied(boolean occupied) {\r\n        isOccupied = occupied;\r\n    }\r\n\r\n    public Piece getPiece() {\r\n        return piece;\r\n    }\r\n\r\n    public void setPiece(Piece piece) {\r\n        this.piece = piece;\r\n        if(piece != null)\r\n             this.setIcon(new ImageIcon(piece.getPath()));\r\n        else\r\n            this.setIcon(null);\r\n    }\r\n\r\n    public boolean hasPiece() {\r\n        return piece != null;\r\n    }\r\n\r\n    public void removePiece() {\r\n        this.piece = null;\r\n        this.setIcon(null);\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Board/Square.java b/src/main/java/Board/Square.java
+--- a/src/main/java/Board/Square.java	
++++ b/src/main/java/Board/Square.java	
+@@ -1,10 +1,8 @@
+ package Board;
+ 
+-import Pieces.piece.Piece;
++import Pieces.Piece;
+ 
+ import javax.swing.*;
+-import java.awt.event.MouseEvent;
+-import java.awt.event.MouseListener;
+ 
+ public class Square extends JLabel  {
+     private int index;
+Index: src/main/java/Pieces/piece/Rook.java
+===================================================================
+diff --git a/src/main/java/Pieces/piece/Rook.java b/src/main/java/Pieces/Rook.java
+rename from src/main/java/Pieces/piece/Rook.java
+rename to src/main/java/Pieces/Rook.java
+--- a/src/main/java/Pieces/piece/Rook.java	
++++ b/src/main/java/Pieces/Rook.java	
+@@ -1,4 +1,4 @@
+-package Pieces.piece;
++package Pieces;
+ 
+ public class Rook extends Piece {
+     public Rook(boolean isWhite) {
+Index: src/main/java/Pieces/piece/Bishop.java
+===================================================================
+diff --git a/src/main/java/Pieces/piece/Bishop.java b/src/main/java/Pieces/Bishop.java
+rename from src/main/java/Pieces/piece/Bishop.java
+rename to src/main/java/Pieces/Bishop.java
+--- a/src/main/java/Pieces/piece/Bishop.java	
++++ b/src/main/java/Pieces/Bishop.java	
+@@ -1,4 +1,4 @@
+-package Pieces.piece;
++package Pieces;
+ 
+ public class Bishop extends Piece {
+     public Bishop(boolean isWhite) {
+Index: src/main/java/Pieces/piece/King.java
+===================================================================
+diff --git a/src/main/java/Pieces/piece/King.java b/src/main/java/Pieces/King.java
+rename from src/main/java/Pieces/piece/King.java
+rename to src/main/java/Pieces/King.java
+--- a/src/main/java/Pieces/piece/King.java	
++++ b/src/main/java/Pieces/King.java	
+@@ -1,4 +1,4 @@
+-package Pieces.piece;
++package Pieces;
+ 
+ public class King extends Piece {
+     public King(boolean isWhite) {
+Index: src/main/java/Pieces/piece/Pawn.java
+===================================================================
+diff --git a/src/main/java/Pieces/piece/Pawn.java b/src/main/java/Pieces/Pawn.java
+rename from src/main/java/Pieces/piece/Pawn.java
+rename to src/main/java/Pieces/Pawn.java
+--- a/src/main/java/Pieces/piece/Pawn.java	
++++ b/src/main/java/Pieces/Pawn.java	
+@@ -1,4 +1,4 @@
+-package Pieces.piece;
++package Pieces;
+ 
+ import Board.Square;
+ 
+Index: src/main/java/Pieces/piece/Queen.java
+===================================================================
+diff --git a/src/main/java/Pieces/piece/Queen.java b/src/main/java/Pieces/Queen.java
+rename from src/main/java/Pieces/piece/Queen.java
+rename to src/main/java/Pieces/Queen.java
+--- a/src/main/java/Pieces/piece/Queen.java	
++++ b/src/main/java/Pieces/Queen.java	
+@@ -1,4 +1,4 @@
+-package Pieces.piece;
++package Pieces;
+ 
+ public class Queen  extends Piece {
+ 
+Index: src/main/java/Pieces/piece/Piece.java
+===================================================================
+diff --git a/src/main/java/Pieces/piece/Piece.java b/src/main/java/Pieces/Piece.java
+rename from src/main/java/Pieces/piece/Piece.java
+rename to src/main/java/Pieces/Piece.java
+--- a/src/main/java/Pieces/piece/Piece.java	
++++ b/src/main/java/Pieces/Piece.java	
+@@ -1,4 +1,4 @@
+-package Pieces.piece;
++package Pieces;
+ 
+ import Board.Square;
+ import Movable.possibleMoves;
+Index: src/main/java/Game/GameController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Game/GameController.java b/src/main/java/Game/GameController.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/Game/GameController.java	
+@@ -0,0 +1,110 @@
++package Game;
++
++import Board.BoardSetup;
++import Board.Square;
++import Movable.Move;
++
++import javax.swing.*;
++import java.awt.*;
++import java.awt.event.MouseAdapter;
++import java.awt.event.MouseEvent;
++import java.util.HashSet;
++import java.util.Vector;
++
++public class GameController {
++    protected int[] GameBoard = new int[64];
++    private Square[] squares = new Square[64];
++    Vector<Integer> prevPossibleMoves;
++    int from = -1;
++    int to = -1;
++    boolean selected = false;
++    BoardSetup boardSetup;
++
++    public BoardSetup getBoardSetup() {
++        return boardSetup;
++    }
++
++    public void setBoardSetup(BoardSetup boardSetup) {
++        this.boardSetup = boardSetup;
++    }
++
++    public GameController() {
++        this.boardSetup = new BoardSetup();
++        this.squares = boardSetup.getSquares();
++        this.GameBoard = boardSetup.getGameBoard();
++        prevPossibleMoves = new Vector<Integer>();
++        for (int i = 0; i < 64; i++) {
++            int finalI = i;
++            this.squares[i].addMouseListener(new MouseAdapter() {
++
++                ;Square square = squares[finalI];
++                @Override
++                public void mouseClicked(MouseEvent e) {
++                    handleSquareClick(square);
++                }
++            });
++        }
++        boardSetup.setSquares(squares);
++        boardSetup.setGameBoard(GameBoard);
++        boardSetup.updateBoard();
++
++    }
++
++
++    private void handleSquareClick(Square square) {
++        int index = square.getIndex();
++
++        if (!selected) {
++
++            from = index;
++            if (squares[from].hasPiece()) {
++                selected = true;
++                System.out.println("Piece selected from square: " + from);
++                squares[index].getPiece().findMoves(index,squares,GameBoard);
++                prevPossibleMoves.clear();
++                new HashSet<>(prevPossibleMoves).containsAll(squares[index].getPiece().getPossibleMoves());
++
++                for(int move : squares[index].getPiece().getPossibleMoves())
++                {
++                    squares[move].setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
++                }
++                boardSetup.setSquares(this.squares);
++                boardSetup.updateBoard();
++
++            }
++        } else {
++            to = index;
++            selected = false;
++            for (int i =0 ; i<64;i++)
++                squares[i].setBorder(null);
++            boardSetup.setSquares(this.squares);
++            boardSetup.updateBoard();
++            if (from != to  ) {
++                Move move = new Move(from, to, squares,GameBoard);
++                squares = move.getBoard();
++                this.GameBoard = move.getGameBoard();
++                boardSetup.setSquares(this.squares);
++                boardSetup.updateBoard();
++
++                System.out.println("Moved piece from square " + from + " to " + to);
++            }
++        }
++    }
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++}

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9bfa5685-f05c-4b4b-8e7b-8e1d9c300eaf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_11_2024_8_24_PM_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_11_2024_8_24_PM_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_11_2024_8_24_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_3_2024_3_21_PM_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_3_2024_3_21_PM_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_3_2024_3_21_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_7_2024_3_55_AM_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_7_2024_3_55_AM_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_7_2024_3_55_AM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_7_2024_3_55_AM__Changes_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_13_2024_3_28_PM_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_13_2024_3_28_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_8_2024_9_13_PM_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_8_2024_9_13_PM_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_8_2024_9_13_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Game/FuturisticButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Game/MainMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/BackgroundPanell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Background_Panel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/BoardSetup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/HighlightManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Piece.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/PieceInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/PiecesLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Theme1PieceInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/addMovements.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/createBoard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/possibleMoves.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/testMoves.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/154750.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/22379951_6544097 (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/22379951_6544097.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/3d-old-wooden-table-looking-out-stone-wall (3).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_bishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_king.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_knight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_pawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_queen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_rook.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/gg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/photorealistic-galaxy-background (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/photorealistic-galaxy-background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/w_bishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/w_pawn (5)-Photoroom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/w_rook.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/watercolour_night_sky_background_2607.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wood-material-background-wallpaper-texture-concept (2).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-floor-with-blackboard (12).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-floor-with-blackboard (2).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-sign-hanging-from-rope (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-sign-hanging-from-rope__1_-removebg-preview (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-sign__2_-removebg-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-texture-looking-out-brown-striped-wall (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sources/bking.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sources/modernMenu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sources/wking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Board/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Highlighting/HighlightManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Highlighting/HighlightManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Movable/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Movable/Move.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Bishop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Pawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Rook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/b_bishop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/b_king.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/b_knight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/b_pawn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/b_queen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/b_rook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/w_bishop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/w_king.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/w_king.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/w_knight.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/w_knight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/w_pawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/w_pawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/w_queen.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/w_queen.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Luka_png/w_rook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/1c1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/1v1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/1vss1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/1vv1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/BBG.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/BBG1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/Designer (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/Jtext.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/Mainlbl.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/bb.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/sources/bb.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/bb1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/bk.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/sources/bk.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/bl.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/sources/bl.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/bord.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/bord1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/chess-pngs.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/eg (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/eg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/egg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/egle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/g1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/g2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/galaxy (2).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/wood-material-background-wallpaper-texture-concept (2) (1).jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/galaxy1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/la.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/natural-wooden-background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/roc.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/roc2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/roc3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/roc33.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/true.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/true1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/wb.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/sources/wb.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/wk.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/sources/wk.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/x.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/x1.jpg" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mostafazizo66&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mostafazizo66/Chess.git&quot;,
+    &quot;accountId&quot;: &quot;26089fc6-ee8c-428d-92b0-d4392b14b6bd&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2lUPjoOoB5x3VOwaU9XqWqtkPtO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/mosta/Chess/src/sources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/mosta/Chess/src/main/java/org/example/Main.java",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mosta\Chess\src\sources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="Chess" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9bfa5685-f05c-4b4b-8e7b-8e1d9c300eaf" name="Changes" comment="" />
+      <created>1725231821562</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1725231821562</updated>
+      <workItem from="1725231822156" duration="557000" />
+      <workItem from="1725232391889" duration="33000" />
+      <workItem from="1725289488078" duration="861000" />
+      <workItem from="1725299518508" duration="1088000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

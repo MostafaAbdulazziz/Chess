@@ -1,24 +1,33 @@
 package Board;
 
+import Game.GameWindow;
 import Highlighting.HighlightManager;
 import Movable.Move;
+import Pieces.piece.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Vector;
 
-public class BoardSetup extends JLabel{
+public class BoardSetup extends JLabel {
     private Square[] squares = new Square[64];
     protected int[] GameBoard = new int[64];
+    GameWindow gameWindow;
     int from = -1;
     int to = -1;
     boolean selected = false;  // To track if a piece is selected
+    boolean isWhiteTurn = true;  // True means it's white's turn, false means it's black's turn
     PiecesLoader pieceLoader;
     HighlightManager highlightManager;
-    Vector<Integer>prevPossibleMoves;
+    Vector<Integer> prevPossibleMoves;
+
+    // Add a callback reference to the GameWindow to switch the timer
+    private Runnable onTurnSwitch;
 
     public JLabel getBoardSetup() {
         return this;
@@ -32,16 +41,16 @@ public class BoardSetup extends JLabel{
         this.squares = squares;
     }
 
-    public BoardSetup() {
-        this.setOpaque(true);
-        this.setLayout(new GridLayout(8, 8));
-        this.setBorder(BorderFactory.createLineBorder(new Color(63, 39, 7), 5));
-        this.setIcon(new ImageIcon("D:\\Programing\\JAVA GUI\\Board_GUI\\src\\sources\\Mainlbl.jpg"));
-
+    public BoardSetup(GameWindow gameWindow) {
+        this.gameWindow = gameWindow;
         this.setOpaque(false);
+        this.setLayout(new GridLayout(8, 8));
+
 
         Color lightWooden = new Color(222, 184, 135);
         Color darkWooden = new Color(139, 69, 19);
+
+
         Color[] colors = {lightWooden, darkWooden};
         int id = 0, cnt = 0;
         for (int i = 0; i < 8; i++) {
@@ -50,8 +59,9 @@ public class BoardSetup extends JLabel{
                 id++;
 
                 Square square = new Square(cnt);
-                square.setBackground(c);
+                square.setOriginalColor(c); // Store original color here
                 square.setOpaque(true);
+                square.setBackground(c); // Set the initial background color
                 square.setHorizontalAlignment(square.CENTER);
                 square.setVerticalAlignment(square.CENTER);
                 square.setText(String.valueOf(cnt));
@@ -64,8 +74,6 @@ public class BoardSetup extends JLabel{
                     }
                 });
 
-
-
                 this.add(square);
                 cnt++;
             }
@@ -73,56 +81,133 @@ public class BoardSetup extends JLabel{
         }
 
         // Load pieces and highlight movement functionality
-
         pieceLoader = new PiecesLoader();
         highlightManager = new HighlightManager();
-        squares = (pieceLoader.loadPieces(squares));
-        squares = (highlightManager.addHighlightFeature(squares));
+        squares = pieceLoader.loadPieces(squares);
+        squares = highlightManager.addHighlightFeature(squares);
         GameBoard = pieceLoader.loadPositions(GameBoard);
-        prevPossibleMoves = new Vector<Integer>();
+        prevPossibleMoves = new Vector<>();
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+    }
 
-        // A
-
+    // Setter method to allow the GameWindow to pass the turn-switching callback
+    public void setOnTurnSwitch(Runnable onTurnSwitch) {
+        this.onTurnSwitch = onTurnSwitch;
     }
 
     private void handleSquareClick(Square square) {
         int index = square.getIndex();
 
         if (!selected) {
-
             from = index;
             if (squares[from].hasPiece()) {
-                selected = true;
-                System.out.println("Piece selected from square: " + from);
-                squares[index].getPiece().findMoves(index,squares,GameBoard);
-                new HashSet<>(prevPossibleMoves).containsAll(squares[index].getPiece().getPossibleMoves());
-
-                for(int move : squares[index].getPiece().getPossibleMoves())
-                {
-                    squares[move].setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+                // Check if the piece matches the player's turn
+                if ((squares[from].getPiece().isWhite() && isWhiteTurn) ||
+                        (!squares[from].getPiece().isWhite() && !isWhiteTurn)) {
+                    selected = true;
+                    System.out.println("Piece selected from square: " + from);
+                    squares[from].getPiece().findMoves(from, squares, GameBoard);
+                    new HashSet<>(prevPossibleMoves).containsAll(squares[from].getPiece().getPossibleMoves());
+                    for (int move : squares[from].getPiece().getPossibleMoves()) {
+                        squares[move].setBorder(BorderFactory.createLineBorder(Color.green, 6));
+                    }
+                    updateBoard();
+                } else {
+                    System.out.println("Not your turn! It's " + (isWhiteTurn ? "white" : "black") + "'s turn.");
                 }
-                updateBoard();
-
             }
         } else {
             to = index;
-                selected = false;
-                for (int i =0 ; i<64;i++)
-                    squares[i].setBorder(null);
-                updateBoard();
-            if (from != to  ) {
-                Move move = new Move(from, to, squares,GameBoard);
+            selected = false;
+
+
+            for (int i = 0; i < 64; i++) {
+                Border border = (Border) squares[i].getBorder();
+                if (border != null) {
+                    Color borderColor = ((LineBorder) border).getLineColor();
+                    if (borderColor != Color.red)
+                        squares[i].setBorder(null);
+                }
+            }
+
+            if (from != to && squares[from].getPiece().getPossibleMoves().contains(to)) {
+                Move move = new Move(from, to, squares, GameBoard);
                 squares = move.getBoard();
                 this.GameBoard = move.getGameBoard();
                 updateBoard();
 
                 System.out.println("Moved piece from square " + from + " to " + to);
+
+                // Switch turns after a successful move
+                if (move.isBoardChanged() && onTurnSwitch != null) {
+                    isWhiteTurn = !isWhiteTurn;
+                    onTurnSwitch.run();
+                    for (int i = 0; i < 64; i++) {
+                        squares[i].setBorder(null);
+                    }
+                }
+                System.out.println("Now it's " + (isWhiteTurn ? "white" : "black") + "'s turn.");
+
+                // Notify the GameWindow to switch the timers
+//                if (onTurnSwitch != null ) {
+//                    onTurnSwitch.run();
+//                }
+                boolean isCheck = false;
+                checkPawnPromotionAfterMove(to);
+                if (move.isBoardChanged()) {
+                    isCheck(!squares[to].getPiece().isWhite());
+
+                }
+                if (move.isBoardChanged()) {
+                    isCheckmate(!squares[to].getPiece().isWhite());
+
+                }
+
+
             }
         }
     }
 
+    private void checkPawnPromotionAfterMove(int index) {
+        Piece piece = squares[index].getPiece();
+        if (piece instanceof Pawn) {
+            if ((piece.isWhite() && index / 8 == 0) || (!piece.isWhite() && index / 8 == 7)) {
+                // Use showOptionDialog to present options as buttons
+                String[] options = {"Queen", "Rook", "Bishop", "Knight"};
+                int choice = JOptionPane.showOptionDialog(this, "Promote your pawn to:", "Pawn Promotion", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+                // Default to Queen if the dialog is closed or no selection is made
+                String promotionChoice = (choice >= 0 && choice < options.length) ? options[choice].toLowerCase() : "queen";
+
+                Piece newPiece;
+                switch (promotionChoice) {
+                    case "rook":
+                        newPiece = new Rook(piece.isWhite());
+                        break;
+                    case "bishop":
+                        newPiece = new Bishop(piece.isWhite());
+                        break;
+                    case "knight":
+                        newPiece = new Knight(piece.isWhite());
+                        break;
+                    case "queen":
+                    default:
+                        newPiece = new Queen(piece.isWhite());  // Default promotion is to Queen
+                        break;
+                }
+
+                // Replace the pawn with the chosen piece
+                squares[index].setPiece(newPiece);
+
+                // Refresh the board UI
+                updateBoard();
+            }
+        }
+    }
+
+
     // Update board UI after move
-    private void updateBoard() {
+    public void updateBoard() {
         this.removeAll();
         for (Square square : squares) {
             this.add(square);
@@ -130,4 +215,118 @@ public class BoardSetup extends JLabel{
         this.revalidate();
         this.repaint();
     }
+
+    public int[] getGameBoard() {
+        return GameBoard;
+    }
+
+    void isCheckmate(boolean isWhite) {
+        try
+        {
+            int KingIdx = 0;
+            for (int i = 0; i < 64; i++) {
+                if ((isWhite && GameBoard[i] == 6) || (!isWhite && GameBoard[i] == 66)) {
+                    KingIdx = i;
+                    break;
+                }
+            }
+            Square[] tempSquares = new Square[64];
+            int[] tempGameBoard = new int[64];
+            for (int i = 0; i < 64; i++) {
+                tempSquares[i] = new Square(i);
+                tempSquares[i].setPiece(squares[i].getPiece());
+                tempGameBoard[i] = GameBoard[i];
+            }
+
+            King king = (King) squares[KingIdx].getPiece();
+            boolean isCheckmate = true;
+            if (king != null)
+                king.findMoves(KingIdx, squares, GameBoard);
+
+            if (king != null && king.getPossibleMoves().isEmpty() && king.isChecked(KingIdx, tempSquares, tempGameBoard, king.isWhite())) {
+                {
+                    for (int i = 0; i < 64; i++) {
+                        if (tempSquares[i].getPiece() != null && squares[i].getPiece().isWhite() == isWhite) {
+                            tempSquares[i].getPiece().findMoves(i, tempSquares, tempGameBoard);
+                            for (int move : squares[i].getPiece().getPossibleMoves()) {
+                                Move move1 = new Move(i, move, tempSquares, tempGameBoard);
+                                if (move1.isMoveValid(i, move, tempSquares, tempGameBoard)) {
+                                    isCheckmate = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (isCheckmate) {
+                    squares[KingIdx].setBackground(Color.RED);
+                    System.out.println("Checkmate");
+                    updateBoard();
+                    if (squares[KingIdx].getPiece().isWhite()) {
+                        gameWindow.endGame("Black Wins");
+//                gameWindow.restartTimers();
+                        gameWindow.stopTimers();
+                    } else {
+                        gameWindow.endGame("White Wins");
+//                gameWindow.restartTimers();
+                        gameWindow.stopTimers();
+
+                    }
+                }
+
+
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error in isCheckmate");
+        }
+
+    }
+
+    void isCheck(boolean isWhite) {
+        int KingIdx = 0;
+        for (int i = 0; i < 64; i++) {
+            if ((isWhite && GameBoard[i] == 6) || (!isWhite && GameBoard[i] == 66)) {
+                KingIdx = i;
+                break;
+            }
+        }
+        Square[] tempSquares = new Square[64];
+        int[] tempGameBoard = new int[64];
+        for (int i = 0; i < 64; i++) {
+            tempSquares[i] = new Square(i);
+            tempSquares[i].setPiece(squares[i].getPiece());
+            tempGameBoard[i] = GameBoard[i];
+        }
+        if (squares[KingIdx].getPiece() != null)
+            squares[KingIdx].getPiece().findMoves(KingIdx, tempSquares, tempGameBoard);
+        King king = (King) squares[KingIdx].getPiece();
+        if (king != null && king.isChecked(KingIdx, tempSquares, tempGameBoard, king.isWhite())) {
+            squares[KingIdx].setBorder(BorderFactory.createLineBorder(Color.RED, 6));
+            System.out.println("Check");
+            updateBoard();
+
+        }
+
+
+    }
+
+    public void restartGame() {
+        this.removeAll();
+        squares = pieceLoader.loadPieces(squares);
+        squares = highlightManager.addHighlightFeature(squares);
+        GameBoard = pieceLoader.loadPositions(GameBoard);
+        updateBoard();
+        isWhiteTurn = true;
+    }
 }
+
+
+
+
+
+
+
+
+

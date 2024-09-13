@@ -61,4 +61,7 @@ public class Piece extends possibleMoves {
     public boolean isChecked(int kingIdx, Square[] squares, int[] gameBoard, boolean isWhiteKing) {
         return false;
     }
+    public void movePiece() {
+        // This will be overridden by specific piece classes (Rook, Queen, King, etc.)
+    }
 }

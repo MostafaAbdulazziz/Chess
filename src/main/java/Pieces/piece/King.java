@@ -1,7 +1,6 @@
 package Pieces.piece;
 
 import Board.Square;
-
 import java.util.Vector;
 
 public class King extends Piece {
@@ -10,6 +9,7 @@ public class King extends Piece {
     int[] GameBoard;
     int startPosition;
 
+    private boolean hasMoved = false; // Track if the king has moved
 
     public King(boolean isWhite) {
         super(isWhite);
@@ -29,11 +29,6 @@ public class King extends Piece {
             {0, -1}, {0, 1},           // Left, right
             {1, -1}, {1, 0}, {1, 1}    // Down left, down, down right
     };
-    int[][] kingCkeckingMoves = {
-            {-2, -2}, {-2, 0}, {-2, 2}, // Up left, up, up right
-            {1, -2}, {1, 2},           // Left, right
-            {2, -2}, {2, 1}, {2, 2}    // Down left, down, down right
-    };
 
     @Override
     public void findMoves(int index, Square[] squares, int[] gameBoard) {
@@ -44,9 +39,7 @@ public class King extends Piece {
         int row = index / 8;
         int col = index % 8;
 
-        // Precompute the opponent's possible moves
-
-
+        // Standard King moves
         for (int[] move : kingMoves) {
             int newRow = row + move[0];
             int newCol = col + move[1];
@@ -56,7 +49,42 @@ public class King extends Piece {
                 addIfValid(targetIndex, squares);
             }
         }
+
+        // Add Castling moves (if available)
+        checkCastling(index, squares, gameBoard);
     }
+
+
+
+    private void checkCastling(int index, Square[] squares, int[] gameBoard) {
+        // Check King-side castling
+        if (!hasMoved && canCastleKingSide(index, squares, gameBoard)) {
+            addIfValid(index + 2, squares); // Add King-side castling move
+        }
+
+        // Check Queen-side castling
+        if (!hasMoved && canCastleQueenSide(index, squares, gameBoard)) {
+            addIfValid(index - 2, squares); // Add Queen-side castling move
+        }
+    }
+
+    private boolean canCastleKingSide(int index, Square[] squares, int[] gameBoard) {
+        Rook rook = (Rook) squares[index + 3].getPiece();
+        return rook != null && !rook.hasMoved() &&
+                squares[index + 1].getPiece() == null &&
+                squares[index + 2].getPiece() == null &&
+                !leadToCheck(index, index + 1, squares) && !leadToCheck(index, index + 2, squares);
+    }
+
+    private boolean canCastleQueenSide(int index, Square[] squares, int[] gameBoard) {
+        Rook rook = (Rook) squares[index - 4].getPiece();
+        return rook != null && !rook.hasMoved() &&
+                squares[index - 1].getPiece() == null &&
+                squares[index - 2].getPiece() == null &&
+                squares[index - 3].getPiece() == null &&
+                !leadToCheck(index, index - 1, squares) && !leadToCheck(index, index - 2, squares);
+    }
+
 
     private void addIfValid(int targetIndex, Square[] squares) {
         if (squares[targetIndex].getPiece() == null) {
@@ -70,11 +98,9 @@ public class King extends Piece {
         }
     }
 
-
     private boolean isValidMove(int row, int col) {
         return row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE;
     }
-
     @Override
     public   boolean isChecked(int index, Square[] squares, int[] pos , boolean isWhite) {
         int wKingRow = 0;
@@ -130,6 +156,15 @@ public class King extends Piece {
         return isChecked(to, temp, pos , this.isWhite());
     }
 
+
+    public boolean hasMoved() {
+        return hasMoved;
+    }
+
+    @Override
+    public void movePiece() {
+        this.hasMoved = true; // Mark that the king has moved
+    }
 
     @Override
     public Vector<Integer> getPossibleMoves() {

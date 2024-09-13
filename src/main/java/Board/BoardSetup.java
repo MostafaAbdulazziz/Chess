@@ -120,7 +120,6 @@ public class BoardSetup extends JLabel {
             to = index;
             selected = false;
 
-
             for (int i = 0; i < 64; i++) {
                 Border border = (Border) squares[i].getBorder();
                 if (border != null) {
@@ -128,6 +127,27 @@ public class BoardSetup extends JLabel {
                     if (borderColor != Color.red)
                         squares[i].setBorder(null);
                 }
+            }
+
+            // Castling detection
+            if (from != to && squares[from].getPiece() instanceof King && Math.abs(from - to) == 2) {
+                // Move the king
+                moveKingForCastling(from, to, squares);
+
+                // Move the rook
+                if (to - from == 2) { // King-side castling
+                    moveRookForCastling(from, from + 3, from + 1, squares);
+                } else if (to == from - 2) { // Queen-side castling
+                    moveRookForCastling(from, from - 4, from - 1, squares);
+                }
+
+                updateBoard(); // Ensure the board is redrawn
+
+                isWhiteTurn = !isWhiteTurn; // Switch turns
+                if (onTurnSwitch != null) {
+                    onTurnSwitch.run();
+                }
+                return;
             }
 
             if (from != to && squares[from].getPiece().getPossibleMoves().contains(to)) {
@@ -162,11 +182,27 @@ public class BoardSetup extends JLabel {
                     isCheckmate(!squares[to].getPiece().isWhite());
 
                 }
-
-
             }
         }
     }
+
+    private void moveRookForCastling(int kingIndex, int rookFrom, int rookTo, Square[] squares) {
+        //move the rook to its new position during castling
+        squares[rookTo].setPiece(squares[rookFrom].getPiece());
+        squares[rookFrom].removePiece(); //remove rook from its original position
+        GameBoard[rookTo] = GameBoard[rookFrom]; //update the game board
+        GameBoard[rookFrom] = 100; //mark original rook position as empty
+    }
+
+    private void moveKingForCastling(int kingFrom, int kingTo, Square[] squares) {
+        Piece king = squares[kingFrom].getPiece();
+        squares[kingTo].setPiece(king); //move king to the new position
+        squares[kingFrom].removePiece(); //clear the original position
+        GameBoard[kingTo] = GameBoard[kingFrom]; //update the game board
+        GameBoard[kingFrom] = 100; //mark original king position as empty
+        updateBoard();
+    }
+
 
     private void checkPawnPromotionAfterMove(int index) {
         Piece piece = squares[index].getPiece();
@@ -239,10 +275,10 @@ public class BoardSetup extends JLabel {
         King king = (King) squares[KingIdx].getPiece();
         boolean isCheckmate = true;
         if (king != null)
-           king.findMoves(KingIdx, squares, GameBoard);
-        if (king != null && king.getPossibleMoves().isEmpty() && king.isChecked(KingIdx, tempSquares, tempGameBoard,king.isWhite())) {
+            king.findMoves(KingIdx, squares, GameBoard);
+        if (king != null && king.getPossibleMoves().isEmpty() && king.isChecked(KingIdx, tempSquares, tempGameBoard, king.isWhite())) {
             {
-                for(int i = 0; i < 64; i++) {
+                for (int i = 0; i < 64; i++) {
                     if (tempSquares[i].getPiece() != null && squares[i].getPiece().isWhite() == isWhite) {
                         tempSquares[i].getPiece().findMoves(i, tempSquares, tempGameBoard);
                         for (int move : squares[i].getPiece().getPossibleMoves()) {

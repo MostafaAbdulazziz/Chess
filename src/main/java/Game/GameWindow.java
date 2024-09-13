@@ -64,7 +64,7 @@ public class GameWindow extends JPanel {
                 }
             }
         });
-//        sidePanel.add(exitGameButton);
+//      sidePanel.add(exitGameButton);
 
         FuturisticButton restartGameButton = new FuturisticButton("Restart Game");
         restartGameButton.setBounds(30, 460, 160, 30);
@@ -121,7 +121,7 @@ public class GameWindow extends JPanel {
 
         // Set background properties
         backgroundLabel.setBounds(0, 0, 1000, 820);
-        backgroundLabel.setIcon(new ImageIcon("C:\\Users\\mosta\\Chess\\src\\main\\resources\\wooden-floor-with-blackboard (12).jpg"));
+        backgroundLabel.setIcon(new ImageIcon("src\\main\\resources\\wooden-floor-with-blackboard (12).jpg"));
 
         // Add components to the main panel
         this.add(sidePanel);

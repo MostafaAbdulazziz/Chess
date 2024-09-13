@@ -221,57 +221,65 @@ public class BoardSetup extends JLabel {
     }
 
     void isCheckmate(boolean isWhite) {
-        int KingIdx = 0;
-        for (int i = 0; i < 64; i++) {
-            if ((isWhite && GameBoard[i] == 6) || (!isWhite && GameBoard[i] == 66)) {
-                KingIdx = i;
-                break;
+        try
+        {
+            int KingIdx = 0;
+            for (int i = 0; i < 64; i++) {
+                if ((isWhite && GameBoard[i] == 6) || (!isWhite && GameBoard[i] == 66)) {
+                    KingIdx = i;
+                    break;
+                }
             }
-        }
-        Square[] tempSquares = new Square[64];
-        int[] tempGameBoard = new int[64];
-        for (int i = 0; i < 64; i++) {
-            tempSquares[i] = new Square(i);
-            tempSquares[i].setPiece(squares[i].getPiece());
-            tempGameBoard[i] = GameBoard[i];
-        }
+            Square[] tempSquares = new Square[64];
+            int[] tempGameBoard = new int[64];
+            for (int i = 0; i < 64; i++) {
+                tempSquares[i] = new Square(i);
+                tempSquares[i].setPiece(squares[i].getPiece());
+                tempGameBoard[i] = GameBoard[i];
+            }
 
-        King king = (King) squares[KingIdx].getPiece();
-        boolean isCheckmate = true;
-        if (king != null)
-           king.findMoves(KingIdx, squares, GameBoard);
-        if (king != null && king.getPossibleMoves().isEmpty() && king.isChecked(KingIdx, tempSquares, tempGameBoard,king.isWhite())) {
-            {
-                for(int i = 0; i < 64; i++) {
-                    if (tempSquares[i].getPiece() != null && squares[i].getPiece().isWhite() == isWhite) {
-                        tempSquares[i].getPiece().findMoves(i, tempSquares, tempGameBoard);
-                        for (int move : squares[i].getPiece().getPossibleMoves()) {
-                            Move move1 = new Move(i, move, tempSquares, tempGameBoard);
-                            if (move1.isMoveValid(i, move, tempSquares, tempGameBoard)) {
-                                isCheckmate = false;
-                                break;
+            King king = (King) squares[KingIdx].getPiece();
+            boolean isCheckmate = true;
+            if (king != null)
+                king.findMoves(KingIdx, squares, GameBoard);
+
+            if (king != null && king.getPossibleMoves().isEmpty() && king.isChecked(KingIdx, tempSquares, tempGameBoard, king.isWhite())) {
+                {
+                    for (int i = 0; i < 64; i++) {
+                        if (tempSquares[i].getPiece() != null && squares[i].getPiece().isWhite() == isWhite) {
+                            tempSquares[i].getPiece().findMoves(i, tempSquares, tempGameBoard);
+                            for (int move : squares[i].getPiece().getPossibleMoves()) {
+                                Move move1 = new Move(i, move, tempSquares, tempGameBoard);
+                                if (move1.isMoveValid(i, move, tempSquares, tempGameBoard)) {
+                                    isCheckmate = false;
+                                    break;
+                                }
                             }
                         }
                     }
                 }
-            }
-            if (isCheckmate) {
-                squares[KingIdx].setBackground(Color.RED);
-                System.out.println("Checkmate");
-                updateBoard();
-                if (squares[KingIdx].getPiece().isWhite()) {
-                    gameWindow.endGame("Black Wins");
+                if (isCheckmate) {
+                    squares[KingIdx].setBackground(Color.RED);
+                    System.out.println("Checkmate");
+                    updateBoard();
+                    if (squares[KingIdx].getPiece().isWhite()) {
+                        gameWindow.endGame("Black Wins");
 //                gameWindow.restartTimers();
-                    gameWindow.stopTimers();
-                } else {
-                    gameWindow.endGame("White Wins");
+                        gameWindow.stopTimers();
+                    } else {
+                        gameWindow.endGame("White Wins");
 //                gameWindow.restartTimers();
-                    gameWindow.stopTimers();
+                        gameWindow.stopTimers();
 
+                    }
                 }
+
+
             }
-
-
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error in isCheckmate");
         }
 
     }

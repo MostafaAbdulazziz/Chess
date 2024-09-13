@@ -5,25 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f23d856-6c8a-4d0e-bacb-06d42943fc50" name="Changes" comment="Adding all resources">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/22379951_6544097 (1).jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/22379951_6544097.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/3d-old-wooden-table-looking-out-stone-wall (3).jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/photorealistic-galaxy-background (1).jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/photorealistic-galaxy-background.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/watercolour_night_sky_background_2607.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/wood-material-background-wallpaper-texture-concept (2) (1).jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/wood-material-background-wallpaper-texture-concept (2).jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-floor-with-blackboard (12).jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-floor-with-blackboard (2).jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-sign-hanging-from-rope (1).jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-sign-hanging-from-rope__1_-removebg-preview (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-sign__2_-removebg-preview.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/wooden-texture-looking-out-brown-striped-wall (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_bishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_king.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_knight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_pawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_queen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/b_rook.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/w_bishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/w_king.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/w_knight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/w_pawn (5)-Photoroom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/w_pawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/w_queen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/w_rook.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/GameWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Highlighting/HighlightManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Highlighting/HighlightManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Movable/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Movable/Move.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Pawn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +41,7 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {

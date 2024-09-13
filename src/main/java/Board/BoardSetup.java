@@ -130,7 +130,7 @@ public class BoardSetup extends JLabel {
             }
 
             // Castling detection
-            if (from != to && squares[from].getPiece() instanceof King && squares[from].getPiece().getPossibleMoves().contains(to)) {
+            if (from != to && squares[from].getPiece() instanceof King &&Math.abs(from - to) == 2 &&squares[from].getPiece().getPossibleMoves().contains(to)) {
                 // Move the king
                 moveKingForCastling(from, to, squares);
 
@@ -195,14 +195,10 @@ public class BoardSetup extends JLabel {
 
     private void moveRookForCastling(int kingIndex, int rookFrom, int rookTo, Square[] squares) {
         Piece rook = squares[rookFrom].getPiece();
-
-        // Move the rook to its new position during castling
         squares[rookTo].setPiece(rook);
         squares[rookFrom].removePiece(); // Remove rook from its original position
         GameBoard[rookTo] = GameBoard[rookFrom]; // Update the game board
         GameBoard[rookFrom] = 100; // Mark original rook position as empty
-
-        // Mark the rook as moved
         if (rook instanceof Rook) {
             ((Rook) rook).movePiece(); // Call movePiece to update the hasMoved flag
         }

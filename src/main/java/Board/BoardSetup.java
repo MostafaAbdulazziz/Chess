@@ -130,7 +130,7 @@ public class BoardSetup extends JLabel {
             }
 
             // Castling detection
-            if (from != to && squares[from].getPiece() instanceof King && Math.abs(from - to) == 2) {
+            if (from != to && squares[from].getPiece() instanceof King && squares[from].getPiece().getPossibleMoves().contains(to)) {
                 // Move the king
                 moveKingForCastling(from, to, squares);
 
@@ -154,6 +154,13 @@ public class BoardSetup extends JLabel {
                 Move move = new Move(from, to, squares, GameBoard);
                 squares = move.getBoard();
                 this.GameBoard = move.getGameBoard();
+
+                // Check if the piece moved is the king or rook and call movePiece()
+                if (squares[to].getPiece() instanceof King) {
+                    ((King) squares[to].getPiece()).movePiece(); // Mark the king as moved
+                } else if (squares[to].getPiece() instanceof Rook) {
+                    ((Rook) squares[to].getPiece()).movePiece(); // Mark the rook as moved
+                }
                 updateBoard();
 
                 System.out.println("Moved piece from square " + from + " to " + to);
@@ -187,21 +194,35 @@ public class BoardSetup extends JLabel {
     }
 
     private void moveRookForCastling(int kingIndex, int rookFrom, int rookTo, Square[] squares) {
-        //move the rook to its new position during castling
-        squares[rookTo].setPiece(squares[rookFrom].getPiece());
-        squares[rookFrom].removePiece(); //remove rook from its original position
-        GameBoard[rookTo] = GameBoard[rookFrom]; //update the game board
-        GameBoard[rookFrom] = 100; //mark original rook position as empty
+        Piece rook = squares[rookFrom].getPiece();
+
+        // Move the rook to its new position during castling
+        squares[rookTo].setPiece(rook);
+        squares[rookFrom].removePiece(); // Remove rook from its original position
+        GameBoard[rookTo] = GameBoard[rookFrom]; // Update the game board
+        GameBoard[rookFrom] = 100; // Mark original rook position as empty
+
+        // Mark the rook as moved
+        if (rook instanceof Rook) {
+            ((Rook) rook).movePiece(); // Call movePiece to update the hasMoved flag
+        }
     }
+
 
     private void moveKingForCastling(int kingFrom, int kingTo, Square[] squares) {
         Piece king = squares[kingFrom].getPiece();
-        squares[kingTo].setPiece(king); //move king to the new position
-        squares[kingFrom].removePiece(); //clear the original position
-        GameBoard[kingTo] = GameBoard[kingFrom]; //update the game board
-        GameBoard[kingFrom] = 100; //mark original king position as empty
+        squares[kingTo].setPiece(king);
+        squares[kingFrom].removePiece(); // Clear the original position
+        GameBoard[kingTo] = GameBoard[kingFrom];
+        GameBoard[kingFrom] = 100; // Mark original king position as empty
+
+        // Mark the king as moved
+        if (king instanceof King) {
+            ((King) king).movePiece();
+        }
         updateBoard();
     }
+
 
 
     private void checkPawnPromotionAfterMove(int index) {

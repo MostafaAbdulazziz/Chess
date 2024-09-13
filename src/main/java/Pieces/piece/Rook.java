@@ -69,7 +69,6 @@ public class Rook extends Piece {
 
         return false;
     }
-
     @Override
     public Vector<Integer> getPossibleMoves() {
         return super.getPossibleMoves();

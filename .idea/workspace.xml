@@ -5,8 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f23d856-6c8a-4d0e-bacb-06d42943fc50" name="Changes" comment="Adding all resources">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Rook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/154750.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/22379951_6544097 (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/22379951_6544097.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/gg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/photorealistic-galaxy-background (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/photorealistic-galaxy-background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/watercolour_night_sky_background_2607.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/wood-material-background-wallpaper-texture-concept (2).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/wooden-floor-with-blackboard (2).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/wooden-sign-hanging-from-rope (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/wooden-texture-looking-out-brown-striped-wall (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/1c1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/1v1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/1vss1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/1vv1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/BBG.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/BBG1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/ChessWallpaper.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/Designer (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/Jtext.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/Mainlbl.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/bord.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/bord1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/chess-pngs.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/eg (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/eg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/egg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/egle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/g1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/g2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/galaxy (2).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/galaxy1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/la.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/natural-wooden-background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/roc.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/roc2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/roc3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/roc33.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/true.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/true1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/x.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sources/x1.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,19 +95,23 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "Application.main.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Aboelanwar/Chess/src/sources",
+    "last_opened_file_path": "C:/Users/Aboelanwar/Chess",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/mosta/Chess/src/main/java/org/example/Main.java",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "editor.preferences.gutterIcons",
     "vue.rearranger.settings.migration": "true"
   }
@@ -73,7 +123,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="jdk.tools.jmod.Main" />
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="Chess" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -103,6 +153,8 @@
       <workItem from="1726100499570" duration="440000" />
       <workItem from="1726100964953" duration="1424000" />
       <workItem from="1726170082157" duration="9896000" />
+      <workItem from="1726260947086" duration="78000" />
+      <workItem from="1726261035368" duration="5460000" />
     </task>
     <task id="LOCAL-00001" summary="first change">
       <option name="closed" value="true" />

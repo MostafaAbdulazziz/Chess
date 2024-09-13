@@ -64,4 +64,7 @@ public class Piece extends possibleMoves {
     public void movePiece() {
         // This will be overridden by specific piece classes (Rook, Queen, King, etc.)
     }
+    public void moveRPiece() {
+        // This will be overridden by specific piece classes (Rook, Queen, King, etc.)
+    }
 }

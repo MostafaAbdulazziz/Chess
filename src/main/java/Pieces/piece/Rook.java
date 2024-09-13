@@ -6,6 +6,7 @@ import java.util.Vector;
 public class Rook extends Piece {
     private static final int BOARD_SIZE = 8;
     Square[] squares;
+    private boolean hasMoved = false; // Track if the rook has moved
 
     public Rook(boolean isWhite) {
         super(isWhite);
@@ -24,19 +25,26 @@ public class Rook extends Piece {
         int row = index / BOARD_SIZE;
         int col = index % BOARD_SIZE;
 
-        // Move in 4 directions: left, right, up, down
         findMovesInDirection(row, col, 0, -1);  // Move left
         findMovesInDirection(row, col, 0, 1);   // Move right
         findMovesInDirection(row, col, -1, 0);  // Move up
         findMovesInDirection(row, col, 1, 0);   // Move down
     }
 
-    // Helper function to find moves in one direction
+    public boolean hasMoved() {
+        return hasMoved;
+    }
+
+
+    @Override
+    public void movePiece() {
+        this.hasMoved = true; // Mark that the rook has moved
+    }
+
     private void findMovesInDirection(int startRow, int startCol, int validRow, int validCol) {
         int row = startRow + validRow;
         int col = startCol + validCol;
 
-        // Continue moving in the direction until out of bounds or blocked
         while (row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE) {
             int targetIndex = row * BOARD_SIZE + col;
 
@@ -50,22 +58,21 @@ public class Rook extends Piece {
     }
 
     private boolean addIfValid(int targetIndex) {
-        // Check if the square is empty
         if (squares[targetIndex].getPiece() == null) {
             super.possible_Moves.add(targetIndex);
-            return true;  // Continue moving in this direction
+            return true;
         }
 
-        // If there's an enemy piece, add the move, but stop further moves in this direction
         if (squares[targetIndex].getPiece().isWhite() != this.isWhite()) {
             super.possible_Moves.add(targetIndex);
         }
 
-        return false;  // Stop further movement (either friendly or enemy piece)
+        return false;
     }
 
     @Override
     public Vector<Integer> getPossibleMoves() {
         return super.getPossibleMoves();
     }
+
 }

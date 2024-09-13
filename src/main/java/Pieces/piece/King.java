@@ -14,9 +14,9 @@ public class King extends Piece {
     public King(boolean isWhite) {
         super(isWhite);
         if (isWhite) {
-            super.setPath("src\\sources\\wk.png");
+            super.setPath("src\\sources\\wking.png");
         } else {
-            super.setPath("src\\sources\\bk.png");
+            super.setPath("src\\sources\\bking.png");
         }
     }
 

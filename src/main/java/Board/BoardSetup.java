@@ -120,7 +120,6 @@ public class BoardSetup extends JLabel {
             to = index;
             selected = false;
 
-
             for (int i = 0; i < 64; i++) {
                 Border border = (Border) squares[i].getBorder();
                 if (border != null) {
@@ -130,10 +129,38 @@ public class BoardSetup extends JLabel {
                 }
             }
 
+            // Castling detection
+            if (from != to && squares[from].getPiece() instanceof King &&Math.abs(from - to) == 2 &&squares[from].getPiece().getPossibleMoves().contains(to)) {
+                // Move the king
+                moveKingForCastling(from, to, squares);
+
+                // Move the rook
+                if (to - from == 2) { // King-side castling
+                    moveRookForCastling(from, from + 3, from + 1, squares);
+                } else if (to == from - 2) { // Queen-side castling
+                    moveRookForCastling(from, from - 4, from - 1, squares);
+                }
+
+                updateBoard(); // Ensure the board is redrawn
+
+                isWhiteTurn = !isWhiteTurn; // Switch turns
+                if (onTurnSwitch != null) {
+                    onTurnSwitch.run();
+                }
+                return;
+            }
+
             if (from != to && squares[from].getPiece().getPossibleMoves().contains(to)) {
                 Move move = new Move(from, to, squares, GameBoard);
                 squares = move.getBoard();
                 this.GameBoard = move.getGameBoard();
+
+                // Check if the piece moved is the king or rook and call movePiece()
+                if (squares[to].getPiece() instanceof King) {
+                    ((King) squares[to].getPiece()).movePiece(); // Mark the king as moved
+                } else if (squares[to].getPiece() instanceof Rook) {
+                    ((Rook) squares[to].getPiece()).movePiece(); // Mark the rook as moved
+                }
                 updateBoard();
 
                 System.out.println("Moved piece from square " + from + " to " + to);
@@ -162,11 +189,37 @@ public class BoardSetup extends JLabel {
                     isCheckmate(!squares[to].getPiece().isWhite());
 
                 }
-
-
             }
         }
     }
+
+    private void moveRookForCastling(int kingIndex, int rookFrom, int rookTo, Square[] squares) {
+        Piece rook = squares[rookFrom].getPiece();
+        squares[rookTo].setPiece(rook);
+        squares[rookFrom].removePiece(); // Remove rook from its original position
+        GameBoard[rookTo] = GameBoard[rookFrom]; // Update the game board
+        GameBoard[rookFrom] = 100; // Mark original rook position as empty
+        if (rook instanceof Rook) {
+            ((Rook) rook).movePiece(); // Call movePiece to update the hasMoved flag
+        }
+    }
+
+
+    private void moveKingForCastling(int kingFrom, int kingTo, Square[] squares) {
+        Piece king = squares[kingFrom].getPiece();
+        squares[kingTo].setPiece(king);
+        squares[kingFrom].removePiece(); // Clear the original position
+        GameBoard[kingTo] = GameBoard[kingFrom];
+        GameBoard[kingFrom] = 100; // Mark original king position as empty
+
+        // Mark the king as moved
+        if (king instanceof King) {
+            ((King) king).movePiece();
+        }
+        updateBoard();
+    }
+
+
 
     private void checkPawnPromotionAfterMove(int index) {
         Piece piece = squares[index].getPiece();
@@ -221,65 +274,57 @@ public class BoardSetup extends JLabel {
     }
 
     void isCheckmate(boolean isWhite) {
-        try
-        {
-            int KingIdx = 0;
-            for (int i = 0; i < 64; i++) {
-                if ((isWhite && GameBoard[i] == 6) || (!isWhite && GameBoard[i] == 66)) {
-                    KingIdx = i;
-                    break;
-                }
+        int KingIdx = 0;
+        for (int i = 0; i < 64; i++) {
+            if ((isWhite && GameBoard[i] == 6) || (!isWhite && GameBoard[i] == 66)) {
+                KingIdx = i;
+                break;
             }
-            Square[] tempSquares = new Square[64];
-            int[] tempGameBoard = new int[64];
-            for (int i = 0; i < 64; i++) {
-                tempSquares[i] = new Square(i);
-                tempSquares[i].setPiece(squares[i].getPiece());
-                tempGameBoard[i] = GameBoard[i];
-            }
+        }
+        Square[] tempSquares = new Square[64];
+        int[] tempGameBoard = new int[64];
+        for (int i = 0; i < 64; i++) {
+            tempSquares[i] = new Square(i);
+            tempSquares[i].setPiece(squares[i].getPiece());
+            tempGameBoard[i] = GameBoard[i];
+        }
 
-            King king = (King) squares[KingIdx].getPiece();
-            boolean isCheckmate = true;
-            if (king != null)
-                king.findMoves(KingIdx, squares, GameBoard);
-
-            if (king != null && king.getPossibleMoves().isEmpty() && king.isChecked(KingIdx, tempSquares, tempGameBoard, king.isWhite())) {
-                {
-                    for (int i = 0; i < 64; i++) {
-                        if (tempSquares[i].getPiece() != null && squares[i].getPiece().isWhite() == isWhite) {
-                            tempSquares[i].getPiece().findMoves(i, tempSquares, tempGameBoard);
-                            for (int move : squares[i].getPiece().getPossibleMoves()) {
-                                Move move1 = new Move(i, move, tempSquares, tempGameBoard);
-                                if (move1.isMoveValid(i, move, tempSquares, tempGameBoard)) {
-                                    isCheckmate = false;
-                                    break;
-                                }
+        King king = (King) squares[KingIdx].getPiece();
+        boolean isCheckmate = true;
+        if (king != null)
+            king.findMoves(KingIdx, squares, GameBoard);
+        if (king != null && king.getPossibleMoves().isEmpty() && king.isChecked(KingIdx, tempSquares, tempGameBoard, king.isWhite())) {
+            {
+                for (int i = 0; i < 64; i++) {
+                    if (tempSquares[i].getPiece() != null && squares[i].getPiece().isWhite() == isWhite) {
+                        tempSquares[i].getPiece().findMoves(i, tempSquares, tempGameBoard);
+                        for (int move : squares[i].getPiece().getPossibleMoves()) {
+                            Move move1 = new Move(i, move, tempSquares, tempGameBoard);
+                            if (move1.isMoveValid(i, move, tempSquares, tempGameBoard)) {
+                                isCheckmate = false;
+                                break;
                             }
                         }
                     }
                 }
-                if (isCheckmate) {
-                    squares[KingIdx].setBackground(Color.RED);
-                    System.out.println("Checkmate");
-                    updateBoard();
-                    if (squares[KingIdx].getPiece().isWhite()) {
-                        gameWindow.endGame("Black Wins");
-//                gameWindow.restartTimers();
-                        gameWindow.stopTimers();
-                    } else {
-                        gameWindow.endGame("White Wins");
-//                gameWindow.restartTimers();
-                        gameWindow.stopTimers();
-
-                    }
-                }
-
-
             }
-        }
-        catch (Exception e)
-        {
-            System.out.println("Error in isCheckmate");
+            if (isCheckmate) {
+                squares[KingIdx].setBackground(Color.RED);
+                System.out.println("Checkmate");
+                updateBoard();
+                if (squares[KingIdx].getPiece().isWhite()) {
+                    gameWindow.endGame("Black Wins");
+//                gameWindow.restartTimers();
+                    gameWindow.stopTimers();
+                } else {
+                    gameWindow.endGame("White Wins");
+//                gameWindow.restartTimers();
+                    gameWindow.stopTimers();
+
+                }
+            }
+
+
         }
 
     }
@@ -321,7 +366,6 @@ public class BoardSetup extends JLabel {
         isWhiteTurn = true;
     }
 }
-
 
 
 

@@ -14,7 +14,7 @@ public class Pawn extends Piece {
         super(isWhite);
         this.gameWindow = gameWindow;  // Pass GameWindow reference for promotions
         if (isWhite) {
-            super.setPath("src\\main\\resources\\w_pawn (5)-Photoroom.png");
+            super.setPath("src\\sources\\wp.png");
         } else {
             super.setPath("src\\sources\\bp.png");
         }
@@ -24,7 +24,7 @@ public class Pawn extends Piece {
     public Pawn(boolean isWhite) {
         super(isWhite);
         if (isWhite) {
-            super.setPath("src\\main\\resources\\w_pawn (5)-Photoroom.png");
+            super.setPath("src\\sources\\wp.png");
 
         } else {
             super.setPath("src\\sources\\bp.png");

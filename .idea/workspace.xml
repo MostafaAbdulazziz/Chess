@@ -5,22 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f23d856-6c8a-4d0e-bacb-06d42943fc50" name="Changes" comment="Adding all resources">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/b_bishop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/b_king.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/b_knight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/b_pawn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/b_queen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/b_rook.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/w_bishop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/w_king.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/w_knight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/w_pawn (5)-Photoroom.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/w_pawn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/w_queen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/w_rook.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/BoardSetup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pieces/piece/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pieces/piece/Pawn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +110,7 @@
       <workItem from="1726087343193" duration="9169000" />
       <workItem from="1726140486981" duration="10778000" />
       <workItem from="1726155926992" duration="4149000" />
+      <workItem from="1726257033566" duration="511000" />
     </task>
     <task id="LOCAL-00001" summary="first change">
       <option name="closed" value="true" />

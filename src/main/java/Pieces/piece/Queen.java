@@ -11,8 +11,10 @@ public class Queen extends Piece {
         super(isWhite);
         if (isWhite) {
             super.setPath("src\\sources\\wq.png");
+            super.setIconPath("src\\sources\\swq.png");
         } else {
             super.setPath("src\\sources\\bq.png");
+            super.setIconPath("src\\sources\\sbq.png");
         }
     }
 

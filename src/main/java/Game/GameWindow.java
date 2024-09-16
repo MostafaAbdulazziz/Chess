@@ -18,6 +18,8 @@ public class GameWindow extends JPanel {
     // Timer variables
     private JLabel whiteTimerLabel;
     private JLabel blackTimerLabel;
+    public JLabel blackDiedPieces;
+    public JLabel whiteDiedPieces;
     private Timer whiteTimer;
     private Timer blackTimer;
     private int whiteTimeRemaining; // Time in seconds for white
@@ -26,12 +28,24 @@ public class GameWindow extends JPanel {
 
     public GameWindow(CardLayout cardLayout, JPanel mainPanel) {
         this.board = new BoardSetup(this);
+        System.out.println(this.getSize());
+
 
         backgroundLabel = new JLabel();
         this.setLayout(null);
 
+        JLabel bottomLabel = new JLabel();
+        bottomLabel.setBounds(25, 380, 300, 300);
+        bottomLabel.setIcon(new ImageIcon("src\\main\\resources\\wooden-sign__2_-removebg-preview.png"));
+        bottomLabel.setOpaque(false);
+        FuturisticButton restartGameButton = new FuturisticButton("Restart Game");
+        exitGameButton = new FuturisticButton("Exit Game");
+        bottomLabel.add(restartGameButton);
+        bottomLabel.add(exitGameButton);
+
+
         // Set up the chess board, shifted to the left
-        board.setBounds(250, 25, 720, 720); // Shifted to the left to make room for the side panel
+        board.setBounds(330, 25, 720, 720); // Shifted to the left to make room for the side panel
         backgroundLabel.add(board);
 
 
@@ -43,8 +57,8 @@ public class GameWindow extends JPanel {
         sidePanel.setOpaque(false);
 
         // Add Exit Game button
-        exitGameButton = new FuturisticButton("Exit Game");
-        exitGameButton.setBounds(30, 500, 160, 30); // Button in the side panel
+
+        exitGameButton.setBounds(50, 480, 140, 30); // Button in the side panel
         exitGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,10 +78,8 @@ public class GameWindow extends JPanel {
                 }
             }
         });
-//      sidePanel.add(exitGameButton);
 
-        FuturisticButton restartGameButton = new FuturisticButton("Restart Game");
-        restartGameButton.setBounds(30, 460, 160, 30);
+        restartGameButton.setBounds(50, 430, 140, 30);
         restartGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,16 +102,31 @@ public class GameWindow extends JPanel {
 //        sidePanel.add(restartGameButton);
 
 
-        JLabel bottomLabel = new JLabel();
-        bottomLabel.setBounds(25, 380, 300, 300);
-        bottomLabel.setIcon(new ImageIcon("src\\main\\resources\\wooden-sign__2_-removebg-preview.png"));
-        bottomLabel.setOpaque(false);
+        blackDiedPieces = new JLabel();
+        blackDiedPieces.setLayout(new GridLayout(2, 2));
+//        blackDiedPieces.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        blackDiedPieces.setBounds(1070, 25, 400, 100);
+        blackDiedPieces.setBackground(new Color(139, 69, 19));
+        blackDiedPieces.setIcon(new ImageIcon("src\\sources\\kl.jpg"));
+        blackDiedPieces.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 
-        bottomLabel.add(restartGameButton);
-        bottomLabel.add(exitGameButton);
+
+        whiteDiedPieces = new JLabel();
+        whiteDiedPieces.setLayout(new GridLayout(2, 2));
+//        whiteDiedPieces.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        whiteDiedPieces.setBounds(1070, 635, 400, 100);
+//        whiteDiedPieces.setBackground(new Color(222, 184, 135));
+
+        whiteDiedPieces.setIcon(new ImageIcon("src\\sources\\kl.jpg"));
+        whiteDiedPieces.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+
+
+        this.add(blackDiedPieces);
+        this.add(whiteDiedPieces);
+
+        this.add(restartGameButton);
+        this.add(exitGameButton);
         this.add(bottomLabel);
-//        this.add(restartGameButton);
-//        this.add(exitGameButton);
 
 
         // White player timer
@@ -108,6 +135,7 @@ public class GameWindow extends JPanel {
         whiteTimerLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
         whiteTimerLabel.setForeground(Color.WHITE);
         whiteTimerLabel.setBackground(new Color(255, 255, 255, 0));
+
         whiteTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         sidePanel.add(whiteTimerLabel);
 
@@ -120,8 +148,8 @@ public class GameWindow extends JPanel {
         sidePanel.add(blackTimerLabel);
 
         // Set background properties
-        backgroundLabel.setBounds(0, 0, 1000, 820);
-        backgroundLabel.setIcon(new ImageIcon("src\\main\\resources\\wooden-floor-with-blackboard (12).jpg"));
+        backgroundLabel.setBounds(0, 0, 1500, 800);
+        backgroundLabel.setIcon(new ImageIcon("src\\main\\resources\\ww.jpg"));
 
         // Add components to the main panel
         this.add(sidePanel);
@@ -221,11 +249,20 @@ public class GameWindow extends JPanel {
     // Method to reset the chess board
     private void resetBoard() {
         this.board = new BoardSetup(this);
-        board.setBounds(250, 25, 720, 720);
+        board.setBounds(330, 25, 720, 720);
+        this.isWhiteTurn = true;
+        board.setOnTurnSwitch(this::switchTurn);
         backgroundLabel.removeAll();
         backgroundLabel.add(board);
         backgroundLabel.revalidate();
         backgroundLabel.repaint();
+        whiteDiedPieces.removeAll();
+        whiteDiedPieces.revalidate();
+        whiteDiedPieces.repaint();
+        blackDiedPieces.removeAll();
+        blackDiedPieces.revalidate();
+        blackDiedPieces.repaint();
+
 
         // Reset timers to default or user-defined value
 
@@ -311,6 +348,23 @@ public class GameWindow extends JPanel {
         blackTimer.stop();
     }
 
+    public void updateWhiteDiedPieces(Piece piece) {
+        JLabel pieceLabel = new JLabel();
+        pieceLabel.setIcon(new ImageIcon(piece.getIconPath()));
+        whiteDiedPieces.add(pieceLabel);
+        whiteDiedPieces.revalidate();
+        whiteDiedPieces.repaint();
+    }
+
+    public void updateBlackDiedPieces(Piece piece) {
+        JLabel pieceLabel = new JLabel();
+        pieceLabel.setIcon(new ImageIcon(piece.getIconPath()));
+        blackDiedPieces.add(pieceLabel);
+        blackDiedPieces.revalidate();
+        blackDiedPieces.repaint();
+    }
+
+
     void displayBoard() {
         this.setVisible(true);
     }
@@ -322,4 +376,6 @@ public class GameWindow extends JPanel {
     BoardSetup getBoard() {
         return this.board;
     }
+
+
 }

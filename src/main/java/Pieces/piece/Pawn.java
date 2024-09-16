@@ -25,6 +25,7 @@ public class Pawn extends Piece {
         super(isWhite);
         if (isWhite) {
             super.setPath("src\\sources\\wp.png");
+
         } else {
             super.setPath("src\\sources\\bp.png");
         }

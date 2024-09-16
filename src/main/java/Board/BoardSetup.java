@@ -64,7 +64,7 @@ public class BoardSetup extends JLabel {
                 square.setBackground(c); // Set the initial background color
                 square.setHorizontalAlignment(square.CENTER);
                 square.setVerticalAlignment(square.CENTER);
-                square.setText(String.valueOf(cnt));
+//                square.setText(String.valueOf(cnt));
                 squares[cnt] = square;
 
                 square.addMouseListener(new MouseAdapter() {
@@ -117,8 +117,10 @@ public class BoardSetup extends JLabel {
                 }
             }
         } else {
+
             to = index;
             selected = false;
+
 
             for (int i = 0; i < 64; i++) {
                 Border border = (Border) squares[i].getBorder();
@@ -128,9 +130,11 @@ public class BoardSetup extends JLabel {
                         squares[i].setBorder(null);
                 }
             }
+            Piece capturedPiece = null;
 
             // Castling detection
             if (from != to && squares[from].getPiece() instanceof King &&Math.abs(from - to) == 2 &&squares[from].getPiece().getPossibleMoves().contains(to)) {
+
                 // Move the king
                 moveKingForCastling(from, to, squares);
 
@@ -151,7 +155,11 @@ public class BoardSetup extends JLabel {
             }
 
             if (from != to && squares[from].getPiece().getPossibleMoves().contains(to)) {
+                 capturedPiece = squares[to].getPiece();  // Save reference to the captured piece, if any
+
+
                 Move move = new Move(from, to, squares, GameBoard);
+
                 squares = move.getBoard();
                 this.GameBoard = move.getGameBoard();
 
@@ -189,7 +197,15 @@ public class BoardSetup extends JLabel {
                     isCheckmate(!squares[to].getPiece().isWhite());
 
                 }
+                if (capturedPiece != null) {
+                    if (capturedPiece.isWhite()) {
+                        gameWindow.updateBlackDiedPieces(capturedPiece);  // White piece captured
+                    } else {
+                        gameWindow.updateWhiteDiedPieces(capturedPiece);  // Black piece captured
+                    }
+                }
             }
+
         }
     }
 
@@ -366,7 +382,6 @@ public class BoardSetup extends JLabel {
         isWhiteTurn = true;
     }
 }
-
 
 
 

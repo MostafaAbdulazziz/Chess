@@ -12,8 +12,10 @@ public class Bishop extends Piece {
         super(isWhite);
         if (isWhite) {
             super.setPath("src/sources/wb.png");
+            super.setIconPath("src\\sources\\wb1.png");
         } else {
             super.setPath("src/sources/bb.png");
+            super.setIconPath("src\\sources\\bb1.png");
         }
     }
 

@@ -8,6 +8,7 @@ public class Piece extends possibleMoves {
 
     public boolean isWhite;
     private String path;
+    private String iconPath;
     protected Vector<Integer> possible_Moves;
     private int startingIdx;         // The index of the square where the piece is located
 
@@ -19,10 +20,17 @@ public class Piece extends possibleMoves {
     public void setPath(String path) {
         this.path = path;
     }
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
+    }
+    public String getIconPath() {
+        return iconPath;
+    }
 
     public String getPath() {
         return path;
     }
+
 
     public boolean isWhite() {
         return this.isWhite;

@@ -17,7 +17,8 @@ public class MainMenu extends JFrame implements ActionListener {
 
     public MainMenu() {
         // Set up the main frame
-        Dimension sz = new Dimension(1000, 800);
+        this.setResizable(false);
+        Dimension sz = new Dimension(1500, 800);
         this.setSize(sz);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null); // Center the window

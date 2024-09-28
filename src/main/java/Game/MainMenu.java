@@ -13,7 +13,7 @@ public class MainMenu extends JFrame implements ActionListener {
     FuturisticButton button2;
     FuturisticButton button3;
     FuturisticButton button4;
-    private final Image backgroundImage = new ImageIcon("src\\sources\\modernMenu.png").getImage(); // Use the uploaded image
+    private final Image backgroundImage = new ImageIcon("src\\main\\resources\\mm.jpg").getImage(); // Use the uploaded image
 
     public MainMenu() {
         // Set up the main frame

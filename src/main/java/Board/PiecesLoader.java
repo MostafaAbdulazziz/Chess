@@ -1,6 +1,7 @@
 package Board;
 
-import Pieces.piece.*;
+import Pieces.*;
+import Pieces.*;
 
 public class PiecesLoader {
     Square[] loadPieces(Square[] squares) {

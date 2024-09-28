@@ -3,7 +3,8 @@ package Board;
 import Game.GameWindow;
 import Highlighting.HighlightManager;
 import Movable.Move;
-import Pieces.piece.*;
+import Pieces.*;
+import Pieces.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -197,7 +198,7 @@ public class BoardSetup extends JLabel {
                     isCheckmate(!squares[to].getPiece().isWhite());
 
                 }
-                if (capturedPiece != null) {
+                if (capturedPiece != null && move.isBoardChanged()) {
                     if (capturedPiece.isWhite()) {
                         gameWindow.updateBlackDiedPieces(capturedPiece);  // White piece captured
                     } else {

@@ -1,11 +1,9 @@
 package Board;
 
-import Pieces.piece.Piece;
+import Pieces.Piece;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class Square extends JLabel  {
     private int index;

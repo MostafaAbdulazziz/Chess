@@ -1,7 +1,8 @@
 package Game;
 
 import Board.BoardSetup;
-import Pieces.piece.*;
+import Pieces.*;
+import Pieces.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +36,7 @@ public class GameWindow extends JPanel {
         this.setLayout(null);
 
         JLabel bottomLabel = new JLabel();
-        bottomLabel.setBounds(25, 380, 300, 300);
+        bottomLabel.setBounds(25, 580, 300, 300);
         bottomLabel.setIcon(new ImageIcon("src\\main\\resources\\wooden-sign__2_-removebg-preview.png"));
         bottomLabel.setOpaque(false);
         FuturisticButton restartGameButton = new FuturisticButton("Restart Game");
@@ -58,7 +59,7 @@ public class GameWindow extends JPanel {
 
         // Add Exit Game button
 
-        exitGameButton.setBounds(50, 480, 140, 30); // Button in the side panel
+        exitGameButton.setBounds(50, 680, 140, 30); // Button in the side panel
         exitGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,7 +80,7 @@ public class GameWindow extends JPanel {
             }
         });
 
-        restartGameButton.setBounds(50, 430, 140, 30);
+        restartGameButton.setBounds(50, 630, 140, 30);
         restartGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,21 +104,21 @@ public class GameWindow extends JPanel {
 
 
         blackDiedPieces = new JLabel();
-        blackDiedPieces.setLayout(new GridLayout(2, 2));
+        blackDiedPieces.setLayout(new GridLayout(2, 8));
 //        blackDiedPieces.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         blackDiedPieces.setBounds(1070, 25, 400, 100);
         blackDiedPieces.setBackground(new Color(139, 69, 19));
-        blackDiedPieces.setIcon(new ImageIcon("src\\sources\\kl.jpg"));
+        blackDiedPieces.setIcon(new ImageIcon("src\\main\\resources\\kl.jpg"));
         blackDiedPieces.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 
 
         whiteDiedPieces = new JLabel();
-        whiteDiedPieces.setLayout(new GridLayout(2, 2));
+        whiteDiedPieces.setLayout(new GridLayout(2, 8));
 //        whiteDiedPieces.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         whiteDiedPieces.setBounds(1070, 635, 400, 100);
 //        whiteDiedPieces.setBackground(new Color(222, 184, 135));
 
-        whiteDiedPieces.setIcon(new ImageIcon("src\\sources\\kl.jpg"));
+        whiteDiedPieces.setIcon(new ImageIcon("src\\main\\resources\\kl.jpg"));
         whiteDiedPieces.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 
 
@@ -149,7 +150,7 @@ public class GameWindow extends JPanel {
 
         // Set background properties
         backgroundLabel.setBounds(0, 0, 1500, 800);
-        backgroundLabel.setIcon(new ImageIcon("src\\main\\resources\\ww.jpg"));
+        backgroundLabel.setIcon(new ImageIcon("src\\main\\resources\\bgg (2).jpg"));
 
         // Add components to the main panel
         this.add(sidePanel);

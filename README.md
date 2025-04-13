@@ -7,11 +7,11 @@ A 1v1 interactive chess game built with Java and Java Swing, featuring a user-fr
 ## Screenshots
 
 ### Gameplay Interface
-![Gameplay Interface](images/gameplay_interface.png)
+![Gameplay Interface](src/main/resources/gameplay_interface.png)
 *The main gameplay screen with timers, highlighted moves, and restart/exit options.*
 
 ### Main Menu
-![Main Menu](images/main_menu.png)
+![Main Menu](src/main/resources/main_menu.png)
 *The main menu with options for 1-player, 2-player, online (future), and exit.*
 
 ## Table of Contents
